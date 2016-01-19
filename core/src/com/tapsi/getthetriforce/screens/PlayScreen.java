@@ -69,11 +69,11 @@ public class PlayScreen implements Screen{
     private LinkedBlockingQueue<ItemDef> itemsToSpawn;
 
 
-    public PlayScreen(GetTheTriforce game){
+    public PlayScreen(GetTheTriforce game, String level){
         atlas = new TextureAtlas("linkandenemies.pack");
 
         this.game = game;
-        //create cam used to follow mario through cam world
+        //create cam used to follow link through cam world
         gameCam = new OrthographicCamera();
 
         //create a FitViewport to maintain virtual aspect ratio despite screen size
@@ -87,7 +87,7 @@ public class PlayScreen implements Screen{
 
         //Load map and setup map renderer
         maploader = new TmxMapLoader();
-        map = maploader.load("level1.tmx");
+        map = maploader.load(level);
         renderer = new OrthogonalTiledMapRenderer(map, 1  / GetTheTriforce.PPM);
 
         //initially set gamcam to be centered correctly at the start of of map

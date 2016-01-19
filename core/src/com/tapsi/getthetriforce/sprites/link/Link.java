@@ -77,7 +77,7 @@ public class Link extends Sprite {
         frames.clear();
 
         //get run animation frames + adding them to the bigLinkRun Animation
-        for(int i = 3; i < 7; i++)
+        for(int i = 3; i < 6; i++)
             frames.add(new TextureRegion(screen.getAtlas().findRegion("big_link"), i * 32, 0, 32, 32));
         biglinkRun = new Animation(0.1f, frames);
 

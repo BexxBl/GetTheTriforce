@@ -68,7 +68,7 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new PlayScreen(game, "level1.tmx"));
                 dispose();
             }
         });
@@ -120,7 +120,7 @@ public class ChangeScreen implements Screen{
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((GetTheTriforce) game));
+            game.setScreen(new PlayScreen((GetTheTriforce) game, "level1.tmx"));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
