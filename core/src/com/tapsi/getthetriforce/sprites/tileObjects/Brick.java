@@ -4,7 +4,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.MapObject;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.PlayScreen;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.link.Link;
 
 /**

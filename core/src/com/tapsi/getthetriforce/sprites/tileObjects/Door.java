@@ -3,7 +3,6 @@ package com.tapsi.getthetriforce.sprites.tileObjects;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,8 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.PlayScreen;
-import com.tapsi.getthetriforce.sprites.link.Link;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 /**
  * Creates the door at the end of the level

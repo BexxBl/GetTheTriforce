@@ -69,12 +69,7 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
 
-            case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:
-                if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
-                    ((Link) fixA.getUserData()).newWorld((Door)fixB.getUserData());
-                else
-                    ((Link) fixB.getUserData()).newWorld((Door) fixA.getUserData());
-                    break;
+
         }
     }
 

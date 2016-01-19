@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens;
+package com.tapsi.getthetriforce.screens.playscreen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;

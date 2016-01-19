@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.PlayScreen;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.link.Link;
 
 /**

@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.PlayScreen;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -87,7 +87,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-2
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
+                game.setScreen(new PlayScreen(game, "level2.tmx"));
                 dispose();
 
             }
@@ -101,6 +101,8 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-3
+                game.setScreen(new PlayScreen(game, "level3.tmx"));
+                dispose();
             }
         });
 

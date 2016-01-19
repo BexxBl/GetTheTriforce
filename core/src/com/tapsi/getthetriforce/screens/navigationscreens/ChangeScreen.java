@@ -17,8 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.PlayScreen;
-import com.tapsi.getthetriforce.sprites.tileObjects.Door;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -73,7 +72,7 @@ public class ChangeScreen implements Screen{
             }
         });
 
-        /*nextLevelTB.addListener(new InputListener() {
+        nextLevelTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -81,12 +80,11 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen2(game));
+                game.setScreen(new PlayScreen(game,""));
                 dispose();
             }
         });
 
-        */
         exitGameTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

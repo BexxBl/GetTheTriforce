@@ -16,10 +16,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
-import com.tapsi.getthetriforce.screens.PlayScreen;
+import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.tileObjects.Door;
 
 
 /**
@@ -371,12 +369,6 @@ public class Link extends Sprite {
             currentState = State.JUMPING;
         }
     }
-
-    public void newWorld(Door userData) {
-        //setting the screen to the ChangeScreen
-        game.setScreen(new ChangeScreen(game));
-    }
-
 
 }
 
