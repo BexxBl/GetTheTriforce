@@ -31,7 +31,7 @@ public class Kid extends Enemy{
     public Kid (PlayScreen screen, float x, float y) {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
-        for(int i = 7; i < 7; i++)
+        for(int i = 4; i < 6; i++)
             frames.add(new TextureRegion(screen.getAtlas().findRegion("kid"), i * 16, 0, 16, 16));
         walkAnimation = new Animation(0.1f, frames);
         stateTime = 0;

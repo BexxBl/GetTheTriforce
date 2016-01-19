@@ -1,6 +1,10 @@
 package com.tapsi.getthetriforce;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -11,7 +15,7 @@ import com.tapsi.getthetriforce.screens.StartScreen;
 /*
  * Main Game Class
  */
-public class GetTheTriforce extends Game {
+public class GetTheTriforce extends Game implements ApplicationListener {
 
 	//Virtual ScreenSize and Box2DScale
 	public static final float PPM = 100 ;
@@ -56,10 +60,13 @@ public class GetTheTriforce extends Game {
 
 		manager.finishLoading();
 		setScreen(new StartScreen(this));
+
 	}
 
 	@Override
 	public void render () {
 		super.render();
 	}
+
+
 }
