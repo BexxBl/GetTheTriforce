@@ -1,6 +1,5 @@
 package com.tapsi.getthetriforce.sprites.link;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -17,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.ChangeScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
 import com.tapsi.getthetriforce.screens.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.tileObjects.Door;

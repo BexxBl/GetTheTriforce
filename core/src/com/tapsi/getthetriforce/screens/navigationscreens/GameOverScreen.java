@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens;
+package com.tapsi.getthetriforce.screens.navigationscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -32,6 +32,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         private GetTheTriforce game;
         private SpriteBatch sb;
         private Texture texture;
+        private Label gameOverLabel, sorryLabel;
 
         public GameOverScreen(final GetTheTriforce game){
             this.game = game;
@@ -53,8 +54,8 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             buttonStyle.fontColor = WHITE;
 
             //creating the textlabels & buttons incl. listener
-            Label gameOverLabel = new Label("GAME OVER", fontGameOver);
-            Label sorryLabel = new Label("You have been killed unfortunately.", font);
+            gameOverLabel = new Label("GAME OVER", fontGameOver);
+            sorryLabel = new Label("You have been killed unfortunately.", font);
 
             TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
             playAgainTB.addListener(new InputListener() {
@@ -84,6 +85,19 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
+            TextButton changeLevelTB= new TextButton("Change Level", buttonStyle);
+            changeLevelTB.addListener(new InputListener(){
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    game.setScreen(new LevelScreen(game));
+                }
+            });
+
             //creating & filling the table
             Table table = new Table();
             table.center();
@@ -94,6 +108,8 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             table.add(sorryLabel).expandX().padTop(10f);
             table.row();
             table.add(playAgainTB).expandX().padTop(10f);
+            table.row();
+            table.add(changeLevelTB).expandX().padTop(10f);
             table.row();
             table.add(exitTB).expandX().padTop(20f);
 
@@ -139,6 +155,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         @Override
         public void dispose() {
             stage.dispose();
+            texture.dispose();
         }
     }
 

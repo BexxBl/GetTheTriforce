@@ -24,7 +24,6 @@ import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.items.ItemDef;
 import com.tapsi.getthetriforce.sprites.items.Mushroom;
 import com.tapsi.getthetriforce.sprites.link.Link;
-import com.tapsi.getthetriforce.sprites.tileObjects.Door;
 import com.tapsi.getthetriforce.tools.B2WorldCreator;
 import com.tapsi.getthetriforce.tools.WorldContactListener;
 
@@ -236,7 +235,7 @@ public class PlayScreen implements Screen{
 
         //if link is dead--> set Screen to the GameOverScreen
         if(gameOver()){
-            game.setScreen(new GameOverScreen(game));
+            game.setScreen(new com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen(game));
             dispose();
         }
     }

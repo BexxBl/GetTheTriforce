@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens;
+package com.tapsi.getthetriforce.screens.navigationscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.PlayScreen;
 
 /**
  * Screen the loads at the start of opening the app
@@ -33,7 +32,7 @@ public class StartScreen implements Screen {
         this.game = game;
         sb = game.batch;
 
-        texture= new Texture("test/start.jpg");
+        texture= new Texture("test/back.jpg");
 
 
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
@@ -46,14 +45,13 @@ public class StartScreen implements Screen {
         table.setFillParent(true);
 
         Label welcomeLabel = new Label("Welcome to ", font);
-        Label startLabel = new Label("GET THE TRIFORCE", font);
-        Label playAgainLabel = new Label("Click to Play!", font);
+        Label textLabel = new Label("GET THE TRIFORCE", font);
+
 
         table.add(welcomeLabel).expandX();
         table.row();
-        table.add(startLabel);
+        table.add(textLabel);
         table.row();
-        table.add(playAgainLabel).expandX().padTop(10f);
 
         stage.addActor(table);
 
@@ -71,7 +69,7 @@ public class StartScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((GetTheTriforce) game));
+            game.setScreen(new com.tapsi.getthetriforce.screens.navigationscreens.LevelScreen((GetTheTriforce) game));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -106,5 +104,6 @@ public class StartScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        texture.dispose();
     }
 }
