@@ -9,7 +9,6 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.link.Link;
-import com.tapsi.getthetriforce.sprites.tileObjects.Door;
 import com.tapsi.getthetriforce.sprites.tileObjects.InteractiveTileObject;
 
 /**

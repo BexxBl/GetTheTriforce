@@ -57,7 +57,7 @@ public class LevelScreen implements Screen {
 
         //creating the Labels & Buttons
         selectionLabel = new Label("Select your level of choice now",fontHeading);
-        clickLabel = new Label("Just click the levelname to do so", font);
+        clickLabel = new Label("(just click the levelname to do so)", font);
 
         level1TB = new TextButton("Level 1-1",buttonStyle);
         level2TB = new TextButton("Level 1-2",buttonStyle);
@@ -65,7 +65,7 @@ public class LevelScreen implements Screen {
 
         exitTB = new TextButton("Exit Game",buttonStyle);
 
-        //creating listener for the textbuttons
+        //creating listener for the textButtons
         level1TB.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -87,7 +87,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-2
-                game.setScreen(new PlayScreen(game, "level2.tmx"));
+                game.setScreen(new PlayScreen(game, "level1.tmx"));
                 dispose();
 
             }
@@ -101,7 +101,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-3
-                game.setScreen(new PlayScreen(game, "level3.tmx"));
+                game.setScreen(new PlayScreen(game, "level1.tmx"));
                 dispose();
             }
         });

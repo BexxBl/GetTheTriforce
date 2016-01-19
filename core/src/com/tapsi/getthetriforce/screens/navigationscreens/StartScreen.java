@@ -69,7 +69,7 @@ public class StartScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()) {
-            game.setScreen(new com.tapsi.getthetriforce.screens.navigationscreens.LevelScreen((GetTheTriforce) game));
+            game.setScreen(new LevelScreen((GetTheTriforce) game));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);

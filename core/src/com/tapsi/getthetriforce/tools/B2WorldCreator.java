@@ -16,7 +16,7 @@ import com.tapsi.getthetriforce.sprites.enemies.Chicken;
 import com.tapsi.getthetriforce.sprites.enemies.Kid;
 import com.tapsi.getthetriforce.sprites.tileObjects.Brick;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.tileObjects.Door;
+import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
 import com.tapsi.getthetriforce.sprites.tileObjects.Stone;
 
 /**
@@ -76,7 +76,7 @@ public class B2WorldCreator {
 
         //create the door at the end
         for(MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
-            new Door(screen,object);
+            new Chest(screen,object);
         }
 
         //create all chickens
