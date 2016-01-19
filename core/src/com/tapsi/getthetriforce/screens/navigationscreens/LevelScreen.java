@@ -33,8 +33,8 @@ public class LevelScreen implements Screen {
     private Texture texture;
     private Table table;
 
-    private Label.LabelStyle fontHeading, font;
-    private Label selectionLabel, clickLabel;
+    private Label.LabelStyle fontHeading;
+    private Label selectionLabel;
     private TextButton level1TB, level2TB, level3TB, exitTB;
 
     public LevelScreen (final GetTheTriforce game){
@@ -49,7 +49,6 @@ public class LevelScreen implements Screen {
 
         //setting up the style of the label and textbutton
         fontHeading = new Label.LabelStyle(new BitmapFont(), RED);
-        font= new Label.LabelStyle(new BitmapFont(), WHITE);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
@@ -57,7 +56,6 @@ public class LevelScreen implements Screen {
 
         //creating the Labels & Buttons
         selectionLabel = new Label("Select your level of choice now",fontHeading);
-        clickLabel = new Label("(just click the levelname to do so)", font);
 
         level1TB = new TextButton("Level 1-1",buttonStyle);
         level2TB = new TextButton("Level 1-2",buttonStyle);
@@ -125,18 +123,15 @@ public class LevelScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expand();
+        table.add(selectionLabel).expandX().padTop(30f);
         table.row();
-        table.add(clickLabel).expand().padTop(10f);
+        table.add(level1TB);
         table.row();
-        table.row().padTop(20f);
-        table.add(level1TB).expand().padTop(10f);
+        table.add(level2TB);
         table.row();
-        table.add(level2TB).expand().padTop(10f);
+        table.add(level3TB);
         table.row();
-        table.add(level3TB).expand().padTop(10f);
-        table.row();
-        table.add(exitTB).expand().padTop(30f);
+        table.add(exitTB).expand();
 
         stage.addActor(table);
 

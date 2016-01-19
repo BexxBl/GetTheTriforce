@@ -55,7 +55,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
             //creating the textlabels & buttons incl. listener
             gameOverLabel = new Label("GAME OVER", fontGameOver);
-            sorryLabel = new Label("You have been killed unfortunately.", font);
+            sorryLabel = new Label("You have been killed unfortunately.", fontGameOver);
 
             TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
             playAgainTB.addListener(new InputListener() {
