@@ -46,9 +46,9 @@ public class WorldContactListener implements ContactListener{
                 break;
             case GetTheTriforce.LINK_BIT | GetTheTriforce.ENEMY_BIT:
                 if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
-                    ((Link) fixA.getUserData()).hit((Enemy)fixB.getUserData());
+                    ((Link) fixA.getUserData()).hit((Enemy) fixB.getUserData());
                 else
-                    ((Link) fixB.getUserData()).hit((Enemy)fixA.getUserData());
+                    ((Link) fixB.getUserData()).hit((Enemy) fixA.getUserData());
                 break;
 
             case GetTheTriforce.ITEM_BIT | GetTheTriforce.OBJECT_BIT:
@@ -68,11 +68,9 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
             case GetTheTriforce.LINK_BIT | GetTheTriforce.HOLE_BIT:
-                if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
-                    ((Link) fixA.getUserData()).die();
-                else
-                    ((Link) fixB.getUserData()).die();
+
                 break;
+
             case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:
                 break;
 
