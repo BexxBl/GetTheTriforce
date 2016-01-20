@@ -38,7 +38,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             this.game = game;
             sb= game.batch;
 
-            //initialize vieport and stage
+            //initialize viewport and stage
             viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
             stage = new Stage(viewport, game.batch);
 

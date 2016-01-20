@@ -230,7 +230,6 @@ public class PlayScreen implements Screen{
         //draw controls when using ios
         if(Gdx.app.getType() == Application.ApplicationType.iOS){
             controls.stage.draw();
-
         }
 
         //if link is dead--> set Screen to the GameOverScreen

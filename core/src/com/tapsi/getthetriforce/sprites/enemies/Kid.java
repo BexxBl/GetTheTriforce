@@ -74,7 +74,8 @@ public class Kid extends Enemy{
                 GetTheTriforce.BRICK_BIT |
                 GetTheTriforce.ENEMY_BIT |
                 GetTheTriforce.OBJECT_BIT |
-                GetTheTriforce.LINK_BIT;
+                GetTheTriforce.LINK_BIT|
+                GetTheTriforce.HOLE_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

@@ -48,6 +48,19 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+        //creates the holes
+        for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / GetTheTriforce.PPM, (rect.getY() + rect.getHeight() / 2) / GetTheTriforce.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2 / GetTheTriforce.PPM, rect.getHeight() / 2 / GetTheTriforce.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
 
         //create pipe bodies/fixtures
         for(MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
@@ -74,7 +87,7 @@ public class B2WorldCreator {
             new Stone(screen, object);
         }
 
-        //create the door at the end
+        //create the Ches at the end
         for(MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
             new Chest(screen,object);
         }
