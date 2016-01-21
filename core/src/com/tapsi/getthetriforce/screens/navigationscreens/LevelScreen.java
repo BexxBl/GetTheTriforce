@@ -55,7 +55,7 @@ public class LevelScreen implements Screen {
         buttonStyle.fontColor = WHITE;
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("Select your level of choice now",fontHeading);
+        selectionLabel = new Label("Choose from these levels",fontHeading);
 
         level1TB = new TextButton("Level 1",buttonStyle);
         level2TB = new TextButton("Level 2",buttonStyle);

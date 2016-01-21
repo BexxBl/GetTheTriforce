@@ -50,7 +50,7 @@ public class StartScreen implements Screen {
 
         table.add(welcomeLabel).expandX();
         table.row();
-        table.add(textLabel);
+        table.add(textLabel).padTop(20f);
         table.row();
 
         stage.addActor(table);

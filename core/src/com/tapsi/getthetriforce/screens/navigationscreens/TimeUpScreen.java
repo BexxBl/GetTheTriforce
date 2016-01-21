@@ -2,7 +2,6 @@ package com.tapsi.getthetriforce.screens.navigationscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,46 +18,46 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
+import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Creates the screen between the levels
+ * Created by Rebecca on 21.01.16.
  */
-public class ChangeScreen implements Screen{
+public class TimeUpScreen implements Screen {
+
     private Viewport viewport;
     private Stage stage;
+
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
+    private Label gameOverLabel, sorryLabel;
 
-    public ChangeScreen(final GetTheTriforce game) {
-
-
+    public TimeUpScreen(final GetTheTriforce game){
         this.game = game;
-        sb = game.batch;
+        sb= game.batch;
 
-        texture= new Texture("test/back.jpg");
-
-
+        //initialize viewport and stage
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        //setting up the backgroundImage
+        texture = new Texture("test/back.jpg");
+
+        //setting up the style of the label and textbutton
+        Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
+        Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
+
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
+        //creating the textlabels & buttons incl. listener
+        gameOverLabel = new Label("TIME IS UP", fontGameOver);
+        sorryLabel = new Label("You have reached the time limit for this level. Please: ", fontGameOver);
 
-        Label completeLabel = new Label("You completed the Level ", font);
-        Label descionLabel = new Label("Do you want to_", font);
         TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
-        TextButton nextLevelTB = new TextButton("Go to the next Level",buttonStyle);
-        TextButton exitGameTB = new TextButton("Exit the Game", buttonStyle);
-
-        //setting up the listener
         playAgainTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -67,12 +66,13 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
+                game.setScreen(new PlayScreen((GetTheTriforce) game, "level1.tmx"));
                 dispose();
             }
         });
 
-        nextLevelTB.addListener(new InputListener() {
+        TextButton changeLevelTB= new TextButton("Change Level", buttonStyle);
+        changeLevelTB.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -80,12 +80,13 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,""));
-                dispose();
+                game.setScreen(new LevelScreen(game));
             }
         });
 
-        exitGameTB.addListener(new InputListener() {
+
+        TextButton exitTB = new TextButton("Exit the Game", buttonStyle);
+        exitTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -97,37 +98,40 @@ public class ChangeScreen implements Screen{
             }
         });
 
-        table.add(completeLabel).expandX();
+
+
+        //creating & filling the table
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
+
+        table.add(gameOverLabel).expandX();
         table.row();
-        table.add(descionLabel);
+        table.add(sorryLabel).expandX().padTop(10f);
         table.row();
         table.add(playAgainTB).expandX().padTop(10f);
         table.row();
-        table.add(nextLevelTB).expandX().padTop(10f);
+        table.add(changeLevelTB).expandX().padTop(10f);
         table.row();
-        table.add(exitGameTB).expandX().padTop(10f);
+        table.add(exitTB).expandX().padTop(20f);
 
+        //adding table to stage
         stage.addActor(table);
     }
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((GetTheTriforce) game, "level1.tmx"));
-            dispose();
-        }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.begin();
-        sb.draw(texture,0,0);
+        sb.draw(texture, 0, 0);
         sb.end();
         stage.draw();
-
     }
 
     @Override
@@ -153,5 +157,6 @@ public class ChangeScreen implements Screen{
     @Override
     public void dispose() {
         stage.dispose();
+        texture.dispose();
     }
 }

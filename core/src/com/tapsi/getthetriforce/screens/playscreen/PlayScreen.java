@@ -20,6 +20,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.items.ItemDef;
@@ -241,7 +242,7 @@ public class PlayScreen implements Screen{
 
         //if time is up --> set Screen to GameOverScreen
         if (hud.isTimeUp()){
-            game.setScreen(new GameOverScreen(game));
+            game.setScreen(new TimeUpScreen(game));
             dispose();
         }
 

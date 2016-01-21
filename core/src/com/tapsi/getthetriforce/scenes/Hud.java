@@ -14,7 +14,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 
 /**
  * Class to show the gameinformation at the top of the screen.
- * Contains in which level we are, how many points the player has gathered, how many time is left
+ * Contains how many points the player has gathered, how many time is left
  */
 
 public class Hud implements Disposable{
@@ -60,7 +60,6 @@ public class Hud implements Disposable{
         //add labels to table, padding the top, and giving them all equal width with expandX
         table.add(linkLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
-
         table.row();
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
