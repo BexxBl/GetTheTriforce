@@ -51,7 +51,6 @@ public class PlayScreen implements Screen{
     //Controller variables
     private Controls controls;
 
-
     //Tiled map variables
     private TmxMapLoader maploader;
     private TiledMap map;
@@ -150,9 +149,7 @@ public class PlayScreen implements Screen{
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (controls.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-
         }
-
     }
 
 
@@ -227,8 +224,8 @@ public class PlayScreen implements Screen{
         //draw controls when using android
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             controls.stage.draw();
-
         }
+
         //draw controls when using ios
         if(Gdx.app.getType() == Application.ApplicationType.iOS){
             controls.stage.draw();
@@ -245,7 +242,6 @@ public class PlayScreen implements Screen{
             game.setScreen(new TimeUpScreen(game));
             dispose();
         }
-
 
     }
 
@@ -297,13 +293,7 @@ public class PlayScreen implements Screen{
         b2dr.dispose();
         hud.dispose();
         controls.dispose();
-
-
-
     }
 
     public Hud getHud(){ return hud; }
-
-
-
 }

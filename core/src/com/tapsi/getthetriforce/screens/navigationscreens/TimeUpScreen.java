@@ -22,7 +22,7 @@ import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Created by Rebecca on 21.01.16.
+ * Creates a navigationscreen that shows up when the timer is 0
  */
 public class TimeUpScreen implements Screen {
 

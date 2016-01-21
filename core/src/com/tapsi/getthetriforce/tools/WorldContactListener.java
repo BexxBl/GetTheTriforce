@@ -72,6 +72,7 @@ public class WorldContactListener implements ContactListener{
                 break;
 
             case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:
+
                 break;
 
 
