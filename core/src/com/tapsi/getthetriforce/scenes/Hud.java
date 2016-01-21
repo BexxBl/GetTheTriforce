@@ -28,12 +28,12 @@ public class Hud implements Disposable{
     private boolean timeUp;
 
     //Scene2D Widgets
-    private Label countdownLabel, timeLabel, levelLabel, worldLabel, linkLabel;
+    private Label countdownLabel, timeLabel, linkLabel;
     private static Label scoreLabel;
 
     public Hud (SpriteBatch sb){
         //define tracking variables
-        worldTimer = 300;
+        worldTimer = 250;
         timeCount = 0;
         score = 0;
 
@@ -55,18 +55,14 @@ public class Hud implements Disposable{
         scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         linkLabel = new Label("LINK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add labels to table, padding the top, and giving them all equal width with expandX
         table.add(linkLabel).expandX().padTop(10);
-        table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
 
         table.row();
         table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
 
         //add table to the stage

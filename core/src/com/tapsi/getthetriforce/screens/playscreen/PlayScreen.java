@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
+import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.items.ItemDef;
@@ -234,15 +235,26 @@ public class PlayScreen implements Screen{
 
         //if link is dead--> set Screen to the GameOverScreen
         if(gameOver()){
-            game.setScreen(new com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen(game));
+            game.setScreen(new GameOverScreen(game));
             dispose();
         }
+
+        //if time is up --> set Screen to GameOverScreen
+        if (hud.isTimeUp()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+
+
     }
+
+
 
     public boolean gameOver(){
         if(player.currentState == Link.State.DEAD && player.getStateTimer() > 3){
             return true;
         }
+
         return false;
     }
 

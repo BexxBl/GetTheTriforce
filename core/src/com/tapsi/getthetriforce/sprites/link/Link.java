@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
 
 
 /**
@@ -373,21 +372,7 @@ public class Link extends Sprite {
         }
     }
 
-    public void dieHole(Hole link) {
-        if (!isDead()) {
-            GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class).stop();
-            GetTheTriforce.manager.get("audio/sounds/linkdie.wav", Sound.class).play();
-            linkIsDead = true;
-            Filter filter = new Filter();
-            filter.maskBits = GetTheTriforce.NOTHING_BIT;
 
-            for (Fixture fixture : b2body.getFixtureList()) {
-                fixture.setFilterData(filter);
-            }
-
-            b2body.applyLinearImpulse(new Vector2(0, 4f), b2body.getWorldCenter(), true);
-        }
-    }
 
 }
 

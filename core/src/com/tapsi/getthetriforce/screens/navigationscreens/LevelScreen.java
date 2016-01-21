@@ -57,9 +57,9 @@ public class LevelScreen implements Screen {
         //creating the Labels & Buttons
         selectionLabel = new Label("Select your level of choice now",fontHeading);
 
-        level1TB = new TextButton("Level 1-1",buttonStyle);
-        level2TB = new TextButton("Level 1-2",buttonStyle);
-        level3TB = new TextButton("Level 1-3",buttonStyle);
+        level1TB = new TextButton("Level 1",buttonStyle);
+        level2TB = new TextButton("Level 2",buttonStyle);
+        level3TB = new TextButton("Level 3",buttonStyle);
 
         exitTB = new TextButton("Exit Game",buttonStyle);
 
