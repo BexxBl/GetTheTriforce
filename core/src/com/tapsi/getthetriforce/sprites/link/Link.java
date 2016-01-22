@@ -53,7 +53,6 @@ public class Link extends Sprite {
     private boolean timeToDefineBiglink;
     private boolean timeToRedefinelink;
     private boolean linkIsDead;
-    private boolean linkCollides;
 
     private PlayScreen screen;
     private GetTheTriforce game;
@@ -124,9 +123,6 @@ public class Link extends Sprite {
             defineBiglink();
         if(timeToRedefinelink)
             redefineLink();
-
-
-
     }
 
     //method to finding out wich keyframes should be used while moving around
@@ -141,9 +137,6 @@ public class Link extends Sprite {
             case DEAD:
                 region = linkDead;
                 break;
-            /*case COLLIDING:
-                region = linkStand;
-                */
             case GROWING:
                 region = growlink.getKeyFrame(stateTimer);
                 if(growlink.isAnimationFinished(stateTimer)) {
@@ -191,10 +184,7 @@ public class Link extends Sprite {
         //if link is going positive in Y-Axis he is jumping... or if he just jumped and is falling remain in jump state
         if(linkIsDead)
             return State.DEAD;
-        /*
-        else if(linkCollides)
-            return State.COLLIDING;
-        */
+
         else if(runGrowAnimation)
             return State.GROWING;
         else if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
@@ -362,17 +352,14 @@ public class Link extends Sprite {
         }
     }
 
-    /*for collision with the door
-    public void collide(){
-        if(collides()){
+
+
+    public void changeLevel(){
+        if(!isDead()){
             game.setScreen(new ChangeScreen(game));
         }
     }
 
-    public boolean collides() {
-        return linkCollides;
-    }
-    */
 
     public boolean isDead(){
         return linkIsDead;
