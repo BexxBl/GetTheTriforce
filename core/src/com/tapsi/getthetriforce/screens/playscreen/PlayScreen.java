@@ -2,6 +2,7 @@ package com.tapsi.getthetriforce.screens.playscreen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,6 +21,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
@@ -136,7 +138,6 @@ public class PlayScreen implements Screen{
 
     @Override
     public void show() {
-
     }
 
 
@@ -149,6 +150,7 @@ public class PlayScreen implements Screen{
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (controls.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+
         }
     }
 

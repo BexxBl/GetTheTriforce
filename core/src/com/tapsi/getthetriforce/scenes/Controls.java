@@ -56,7 +56,7 @@ public class Controls implements Disposable{
 
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
-                switch(keycode){
+                switch(keycode) {
                     case Input.Keys.UP:
                         upPressed = false;
                         break;
@@ -66,6 +66,7 @@ public class Controls implements Disposable{
                     case Input.Keys.RIGHT:
                         rightPressed = false;
                         break;
+
                 }
                 return true;
             }
@@ -150,6 +151,7 @@ public class Controls implements Disposable{
     public boolean isRightPressed() {
         return rightPressed;
     }
+
 
     public void draw(){
         stage.draw();
