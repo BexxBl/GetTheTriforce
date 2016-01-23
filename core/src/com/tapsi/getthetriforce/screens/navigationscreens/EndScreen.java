@@ -51,7 +51,6 @@ public class EndScreen implements Screen{
 
         //setting up the ParticleEffect
         particleEffect = new ParticleEffect();
-
         particleEffect.load(Gdx.files.internal("particle/v2white.party"), Gdx.files.internal(""));
         particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
         particleEffect.start();

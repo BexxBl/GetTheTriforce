@@ -16,7 +16,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 
 
 /**
- * Creates the onScreen Controls when using on mobile devices
+ * Creates the Controls for the Game
  */
 
 public class Controls implements Disposable{
@@ -72,6 +72,7 @@ public class Controls implements Disposable{
             }
         });
 
+        //set the input processor to the stage
         Gdx.input.setInputProcessor(stage);
 
         //define a table used to organize control elements

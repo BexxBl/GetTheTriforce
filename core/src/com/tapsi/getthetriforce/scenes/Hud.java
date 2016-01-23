@@ -54,7 +54,6 @@ public class Hud implements Disposable{
         countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
         linkLabel = new Label("LINK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         //add labels to table, padding the top, and giving them all equal width with expandX
