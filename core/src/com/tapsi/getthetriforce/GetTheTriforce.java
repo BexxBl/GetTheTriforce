@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tapsi.getthetriforce.screens.navigationscreens.EndScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
 
 /*
@@ -57,7 +58,7 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 		manager.load("audio/sounds/linkdie.wav", Sound.class);
 
 		manager.finishLoading();
-		setScreen(new EndScreen(this));
+		setScreen(new ReallyWantToLeaveScreen(this));
 
 	}
 
