@@ -66,7 +66,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new PlayScreen((GetTheTriforce) game, "level1.tmx"));
+                    game.setScreen(new PlayScreen((GetTheTriforce) game, "levels/level1.tmx"));
                     dispose();
                 }
             });

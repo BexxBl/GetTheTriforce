@@ -218,8 +218,7 @@ public class Link extends Sprite {
                 GetTheTriforce.OBJECT_BIT |
                 GetTheTriforce.ENEMY_HEAD_BIT |
                 GetTheTriforce.ITEM_BIT|
-                GetTheTriforce.DOOR_BIT|
-                GetTheTriforce.HOLE_BIT;
+                GetTheTriforce.DOOR_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -254,8 +253,7 @@ public class Link extends Sprite {
                 GetTheTriforce.OBJECT_BIT |
                 GetTheTriforce.ENEMY_HEAD_BIT |
                 GetTheTriforce.ITEM_BIT|
-                GetTheTriforce.DOOR_BIT|
-                GetTheTriforce.HOLE_BIT;
+                GetTheTriforce.DOOR_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

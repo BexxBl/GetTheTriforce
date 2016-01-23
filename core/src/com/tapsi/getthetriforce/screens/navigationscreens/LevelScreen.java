@@ -72,7 +72,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-1
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
+                game.setScreen(new PlayScreen(game, "levels/level1.tmx"));
                 dispose();
             }
         });
@@ -85,7 +85,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-2
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
+                game.setScreen(new PlayScreen(game, "levels/level2.tmx"));
                 dispose();
 
             }
@@ -99,7 +99,7 @@ public class LevelScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-3
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
+                game.setScreen(new PlayScreen(game, "levels/level3.tmx"));
                 dispose();
             }
         });
