@@ -68,7 +68,7 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
             case GetTheTriforce.LINK_BIT | GetTheTriforce.HOLE_BIT:
-
+                //
                 break;
 
             case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:

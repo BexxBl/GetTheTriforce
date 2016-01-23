@@ -47,13 +47,15 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 	public SpriteBatch batch;
 
 	//AssetManager to load our music
-	public static AssetManager manager = new AssetManager();
+	public static AssetManager manager;
 
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		manager = new AssetManager();
 
+		//loading all the Audiofiles
 		manager.load("audio/music/zelda.ogg", Music.class);
 		manager.load("audio/sounds/coin.wav", Sound.class);
 		manager.load("audio/sounds/bump.wav", Sound.class);
@@ -65,10 +67,12 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 		manager.load("audio/sounds/linkdie.wav", Sound.class);
 
 		manager.finishLoading();
+
+		//setting the first screen we see to the startscreen
 		setScreen(new StartScreen(this));
 
+		//disabling the back key
 		Gdx.input.setCatchBackKey(true);
-
 		if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
 			setScreen(new ReallyWantToLeaveScreen(this));
 		}
