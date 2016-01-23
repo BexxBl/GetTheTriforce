@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.tapsi.getthetriforce.screens.navigationscreens.EndScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
 
 /*
