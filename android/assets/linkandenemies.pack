@@ -1,0 +1,47 @@
+
+linkandenemies.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+big_link
+  rotate: false
+  xy: 1, 19
+  size: 320, 32
+  orig: 320, 32
+  offset: 0, 0
+  index: -1
+little_link
+  rotate: false
+  xy: 1, 1
+  size: 130, 16
+  orig: 130, 16
+  offset: 0, 0
+  index: -1
+kid
+  rotate: false
+  xy: 323, 35
+  size: 96, 16
+  orig: 96, 16
+  offset: 0, 0
+  index: -1
+chicken
+  rotate: false
+  xy: 133, 1
+  size: 80, 16
+  orig: 80, 16
+  offset: 0, 0
+  index: -1
+mushroom
+  rotate: false
+  xy: 421, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+triforceteil
+  rotate: false
+  xy: 215, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
