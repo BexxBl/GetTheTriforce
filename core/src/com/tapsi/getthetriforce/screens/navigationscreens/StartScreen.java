@@ -32,7 +32,7 @@ public class StartScreen implements Screen {
         this.game = game;
         sb = game.batch;
 
-        texture= new Texture("test/back.jpg");
+        texture= new Texture("textures/back.jpg");
 
 
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());

@@ -45,7 +45,7 @@ public class LevelScreen implements Screen {
         stage = new Stage(viewport, game.batch);
 
         //setting up the backgroundImage
-        texture = new Texture("test/back.jpg");
+        texture = new Texture("textures/back.jpg");
 
         //setting up the style of the label and textbutton
         fontHeading = new Label.LabelStyle(new BitmapFont(), RED);

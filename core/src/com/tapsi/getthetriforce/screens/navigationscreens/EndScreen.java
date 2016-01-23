@@ -33,7 +33,7 @@ public class EndScreen implements Screen{
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private Label headingLabel, messageLabel, congratsLabel;
+    private Label headingLabel, messageLabel, congratsLabel,descionLabel;
 
 
     private ParticleEffect particleEffect;
@@ -47,12 +47,13 @@ public class EndScreen implements Screen{
         stage = new Stage(viewport, game.batch);
 
         //setting up the backgroundImage
-        texture = new Texture("test/back.jpg");
+        texture = new Texture("textures/back.jpg");
 
         //setting up the ParticleEffect
         particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("test/particle/particle1.party"), Gdx.files.internal(""));
-        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT / 2);
+
+        particleEffect.load(Gdx.files.internal("particle/v2white.party"), Gdx.files.internal(""));
+        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
         particleEffect.start();
 
         //setting up the style of the label and textbutton
@@ -66,7 +67,8 @@ public class EndScreen implements Screen{
         //creating the textlabels & buttons incl. listener
         headingLabel = new Label("The End", fontEnd);
         messageLabel = new Label("You have completed all 3 Levels!", fontEnd);
-        congratsLabel = new Label("Congratulations! Do you want to: ", fontEnd);
+        congratsLabel = new Label("Congratulations!", fontEnd);
+        descionLabel = new Label("Do you want to: ",font);
 
 
         TextButton playAgainTB = new TextButton("Start a new Game", buttonStyle);
@@ -108,6 +110,8 @@ public class EndScreen implements Screen{
         table.row();
         table.add(congratsLabel).expandX().padTop(10f);
         table.row();
+        table.add(descionLabel).expandX().padTop(10f);
+        table.row();
         table.add(playAgainTB).expandX().padTop(10f);
         table.row();
         table.add(exitTB).expandX().padTop(20f);
@@ -132,6 +136,7 @@ public class EndScreen implements Screen{
         particleEffect.draw(sb);
         sb.end();
         stage.draw();
+
 
         if (particleEffect.isComplete()){
             particleEffect.reset();
