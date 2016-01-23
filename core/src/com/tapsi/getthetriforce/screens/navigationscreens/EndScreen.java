@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -34,6 +35,9 @@ public class EndScreen implements Screen{
     private Texture texture;
     private Label headingLabel, messageLabel, congratsLabel;
 
+
+    private ParticleEffect particleEffect;
+
     public EndScreen (final GetTheTriforce game){
         this.game = game;
         sb= game.batch;
@@ -44,6 +48,12 @@ public class EndScreen implements Screen{
 
         //setting up the backgroundImage
         texture = new Texture("test/back.jpg");
+
+        //setting up the ParticleEffect
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("test/particle/particle1.party"), Gdx.files.internal(""));
+        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT / 2);
+        particleEffect.start();
 
         //setting up the style of the label and textbutton
         Label.LabelStyle fontEnd = new Label.LabelStyle(new BitmapFont(), RED);
@@ -59,7 +69,7 @@ public class EndScreen implements Screen{
         congratsLabel = new Label("Congratulations! Do you want to: ", fontEnd);
 
 
-        TextButton playAgainTB = new TextButton("Start a new Game. Click here", buttonStyle);
+        TextButton playAgainTB = new TextButton("Start a new Game", buttonStyle);
         playAgainTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -115,10 +125,17 @@ public class EndScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        particleEffect.update(Gdx.graphics.getDeltaTime());
+
         sb.begin();
         sb.draw(texture, 0, 0);
+        particleEffect.draw(sb);
         sb.end();
         stage.draw();
+
+        if (particleEffect.isComplete()){
+            particleEffect.reset();
+        }
     }
 
     @Override
@@ -145,5 +162,6 @@ public class EndScreen implements Screen{
     public void dispose() {
         stage.dispose();
         texture.dispose();
+        particleEffect.dispose();
     }
 }
