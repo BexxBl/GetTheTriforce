@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
+import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
@@ -28,6 +30,7 @@ import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.items.ItemDef;
 import com.tapsi.getthetriforce.sprites.items.Mushroom;
 import com.tapsi.getthetriforce.sprites.link.Link;
+import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
 import com.tapsi.getthetriforce.tools.B2WorldCreator;
 import com.tapsi.getthetriforce.tools.WorldContactListener;
 
@@ -65,6 +68,9 @@ public class PlayScreen implements Screen{
 
     //sprites
     private Link player;
+
+    private Chest chest;
+    private MapObject object;
 
     private Music music;
 
@@ -105,6 +111,8 @@ public class PlayScreen implements Screen{
 
         //create link in our game world
         player = new Link(this);
+
+        chest = new Chest(this, object);
 
         world.setContactListener(new WorldContactListener());
 
@@ -244,7 +252,6 @@ public class PlayScreen implements Screen{
             game.setScreen(new TimeUpScreen(game));
             dispose();
         }
-
     }
 
 

@@ -9,6 +9,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.link.Link;
+import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
 import com.tapsi.getthetriforce.sprites.tileObjects.InteractiveTileObject;
 
 /**
@@ -68,7 +69,7 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
             case GetTheTriforce.LINK_BIT | GetTheTriforce.HOLE_BIT:
-                //
+
                 break;
 
             case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:

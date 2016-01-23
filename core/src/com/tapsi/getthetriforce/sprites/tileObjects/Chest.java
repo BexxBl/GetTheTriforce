@@ -28,6 +28,9 @@ public class Chest {
     protected MapObject object;
 
     protected Fixture fixture;
+    protected BodyDef bdef;
+    protected FixtureDef fdef;
+    protected PolygonShape shape;
 
     public Chest(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -36,9 +39,9 @@ public class Chest {
         this.map = screen.getMap();
         this.bounds = ((RectangleMapObject) object).getRectangle();
 
-        BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
+        bdef = new BodyDef();
+        fdef = new FixtureDef();
+        shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / GetTheTriforce.PPM, (bounds.getY() + bounds.getHeight() / 2) / GetTheTriforce.PPM);
@@ -58,8 +61,6 @@ public class Chest {
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
-
-
 
 
 }
