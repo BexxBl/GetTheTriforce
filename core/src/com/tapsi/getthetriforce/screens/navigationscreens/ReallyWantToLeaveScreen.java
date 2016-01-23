@@ -59,18 +59,21 @@ public class ReallyWantToLeaveScreen implements Screen{
 
         //setting up the Buttons
         yesTB = new TextButton("NO", buttonStyle);
-        yesTB.addListener(new InputListener() {
+        yesTB.addListener(new InputListener(){
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
+               return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new StartScreen(game));
-                dispose();
             }
         });
+
+
+
 
 
         noTB = new TextButton("YES", buttonStyle);

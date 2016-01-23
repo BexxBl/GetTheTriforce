@@ -58,7 +58,7 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 		manager.load("audio/sounds/linkdie.wav", Sound.class);
 
 		manager.finishLoading();
-		setScreen(new ReallyWantToLeaveScreen(this));
+		setScreen(new StartScreen(this));
 
 	}
 
