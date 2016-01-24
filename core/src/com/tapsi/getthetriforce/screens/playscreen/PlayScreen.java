@@ -2,7 +2,6 @@ package com.tapsi.getthetriforce.screens.playscreen;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,9 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
-import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
@@ -69,9 +66,6 @@ public class PlayScreen implements Screen{
     //sprites
     private Link player;
 
-    private Chest chest;
-    private MapObject object;
-
     private Music music;
 
     private Array<Item> items;
@@ -107,11 +101,14 @@ public class PlayScreen implements Screen{
         //allows for debug lines of our box2d world.
         b2dr = new Box2DDebugRenderer();
 
+        //creates the bodies and fixtures
         creator = new B2WorldCreator(this);
 
         //create link in our game world
         player = new Link(this);
 
+
+        //setting the world contactlistener
         world.setContactListener(new WorldContactListener());
 
         //to play the music
@@ -156,7 +153,6 @@ public class PlayScreen implements Screen{
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (controls.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-
         }
     }
 
@@ -212,7 +208,7 @@ public class PlayScreen implements Screen{
         renderer.render();
 
         //renderer our Box2DDebugLines--> to see if every element that interacts with player has a hitbox
-        //b2dr.render(world, gameCam.combined);
+        b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
