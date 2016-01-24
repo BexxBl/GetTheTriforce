@@ -105,7 +105,7 @@ public class PlayScreen implements Screen{
         creator = new B2WorldCreator(this);
 
         //create link in our game world
-        player = new Link(this);
+        player = new Link(this, game);
 
 
         //setting the world contactlistener

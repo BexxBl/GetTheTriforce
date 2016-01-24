@@ -43,7 +43,7 @@ public class ChangeScreen implements Screen{
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
@@ -52,25 +52,12 @@ public class ChangeScreen implements Screen{
         table.center();
         table.setFillParent(true);
 
-        Label completeLabel = new Label("You completed the Level ", font);
-        Label descionLabel = new Label("Do you want to_", font);
-        TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
+        Label completeLabel = new Label("You completed the Level", font);
+        Label descionLabel = new Label("Do you want to", font);
         TextButton nextLevelTB = new TextButton("Go to the next Level",buttonStyle);
         TextButton exitGameTB = new TextButton("Exit the Game", buttonStyle);
 
         //setting up the listener
-        playAgainTB.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game, "level1.tmx"));
-                dispose();
-            }
-        });
 
         nextLevelTB.addListener(new InputListener() {
             @Override
@@ -94,14 +81,13 @@ public class ChangeScreen implements Screen{
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new ReallyWantToLeaveScreen(game));
+                dispose();
             }
         });
 
         table.add(completeLabel).expandX();
         table.row();
         table.add(descionLabel);
-        table.row();
-        table.add(playAgainTB).expandX().padTop(10f);
         table.row();
         table.add(nextLevelTB).expandX().padTop(10f);
         table.row();

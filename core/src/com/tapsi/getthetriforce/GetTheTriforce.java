@@ -40,7 +40,7 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 	public static final short ENEMY_HEAD_BIT = 128;
 	public static final short ITEM_BIT = 256;
 	public static final short LINK_HEAD_BIT = 512;
-	public static final short DOOR_BIT = 1024;
+	public static final short END_BIT = 1024;
 	public static final short HOLE_BIT = 2048;
 
 	//SpriteBatch

@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
 import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 
@@ -57,8 +58,9 @@ public class Link extends Sprite {
     private PlayScreen screen;
     private GetTheTriforce game;
 
-    public Link(PlayScreen screen){
+    public Link(PlayScreen screen, GetTheTriforce game){
         //initialize default values
+        this.game = game;
         this.screen = screen;
         this.world = screen.getWorld();
         currentState = State.STANDING;
@@ -218,7 +220,7 @@ public class Link extends Sprite {
                 GetTheTriforce.OBJECT_BIT |
                 GetTheTriforce.ENEMY_HEAD_BIT |
                 GetTheTriforce.ITEM_BIT|
-                GetTheTriforce.DOOR_BIT;
+                GetTheTriforce.END_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -253,7 +255,7 @@ public class Link extends Sprite {
                 GetTheTriforce.OBJECT_BIT |
                 GetTheTriforce.ENEMY_HEAD_BIT |
                 GetTheTriforce.ITEM_BIT|
-                GetTheTriforce.DOOR_BIT;
+                GetTheTriforce.END_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -291,7 +293,7 @@ public class Link extends Sprite {
                 GetTheTriforce.OBJECT_BIT |
                 GetTheTriforce.ENEMY_HEAD_BIT |
                 GetTheTriforce.ITEM_BIT|
-                GetTheTriforce.DOOR_BIT;
+                GetTheTriforce.END_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -378,7 +380,10 @@ public class Link extends Sprite {
         }
     }
 
+    public void endMethod() {
+        game.setScreen(new ChangeScreen(game));
 
+    }
 
 
 

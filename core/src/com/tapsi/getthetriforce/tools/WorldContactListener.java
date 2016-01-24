@@ -68,11 +68,13 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixA.getUserData()).hitByEnemy((Enemy)fixB.getUserData());
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
-            case GetTheTriforce.LINK_BIT | GetTheTriforce.HOLE_BIT:
 
-                break;
 
-            case GetTheTriforce.LINK_BIT | GetTheTriforce.DOOR_BIT:
+            case GetTheTriforce.LINK_BIT | GetTheTriforce.END_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
+                    ((Link)fixA.getUserData()).endMethod();
+                else
+                    ((Link)fixB.getUserData()).endMethod();
 
                 break;
 

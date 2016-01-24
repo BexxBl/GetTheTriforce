@@ -53,7 +53,7 @@ public class Chest {
         fixture = body.createFixture(fdef);
 
         fixture.setUserData(this);
-        setCategoryFilter(GetTheTriforce.DOOR_BIT);
+        setCategoryFilter(GetTheTriforce.END_BIT);
 
     }
     public void setCategoryFilter(short filterBit){
