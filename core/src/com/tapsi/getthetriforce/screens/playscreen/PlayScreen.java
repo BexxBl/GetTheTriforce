@@ -208,7 +208,7 @@ public class PlayScreen implements Screen{
         renderer.render();
 
         //renderer our Box2DDebugLines--> to see if every element that interacts with player has a hitbox
-        b2dr.render(world, gameCam.combined);
+        //b2dr.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
