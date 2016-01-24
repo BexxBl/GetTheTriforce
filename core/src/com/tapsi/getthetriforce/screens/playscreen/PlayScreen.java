@@ -112,8 +112,6 @@ public class PlayScreen implements Screen{
         //create link in our game world
         player = new Link(this);
 
-        chest = new Chest(this, object);
-
         world.setContactListener(new WorldContactListener());
 
         //to play the music
