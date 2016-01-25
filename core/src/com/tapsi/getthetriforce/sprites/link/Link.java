@@ -353,14 +353,6 @@ public class Link extends Sprite {
     }
 
 
-
-    public void changeLevel(){
-        if(!isDead()){
-            game.setScreen(new ChangeScreen(game));
-        }
-    }
-
-
     public boolean isDead(){
         return linkIsDead;
     }
@@ -382,7 +374,6 @@ public class Link extends Sprite {
 
     public void endMethod() {
         game.setScreen(new ChangeScreen(game));
-
     }
 
 

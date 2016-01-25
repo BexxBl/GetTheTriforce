@@ -139,6 +139,7 @@ public class PlayScreen implements Screen{
         return atlas;
     }
 
+
     @Override
     public void show() {
     }
@@ -299,4 +300,6 @@ public class PlayScreen implements Screen{
     }
 
     public Hud getHud(){ return hud; }
+
+
 }

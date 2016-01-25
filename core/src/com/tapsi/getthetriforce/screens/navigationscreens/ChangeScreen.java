@@ -67,7 +67,7 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,""));
+                game.setScreen(new PlayScreen(game,"level/level2.tmx"));
                 dispose();
             }
         });
@@ -97,16 +97,12 @@ public class ChangeScreen implements Screen{
     }
 
     @Override
-    public void show() {
+    public void show() { Gdx.input.setInputProcessor(stage);
 
     }
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((GetTheTriforce) game, "level1.tmx"));
-            dispose();
-        }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.begin();
@@ -139,5 +135,6 @@ public class ChangeScreen implements Screen{
     @Override
     public void dispose() {
         stage.dispose();
+        texture.dispose();
     }
 }
