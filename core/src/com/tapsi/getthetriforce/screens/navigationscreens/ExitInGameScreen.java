@@ -96,11 +96,11 @@ public class ExitInGameScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expandX().padTop(30f);
+        table.add(selectionLabel).expandX().padTop(10f);
         table.row();
-        table.add(changeLevelTB);
+        table.add(changeLevelTB).expandX().padTop(10f);
         table.row();
-        table.add(exitTB).expand();
+        table.add(exitTB).expandX().padTop(10f);
 
         stage.addActor(table);
 
