@@ -102,23 +102,6 @@ public class WorldContactListener implements ContactListener{
 
                 break;
 
-            /*
-            case GetTheTriforce.ENEMY_BIT | GetTheTriforce.HOLE_BIT:
-                if(fixA.getFilterData().categoryBits == GetTheTriforce.ENEMY_BIT)
-                    ((Kid)fixA.getUserData()).destroy();
-                else
-                    ((Kid)fixB.getUserData()).destroy();
-
-                break;
-
-            case GetTheTriforce.ENEMY_BIT | GetTheTriforce.HOLE_BIT:
-                if(fixA.getFilterData().categoryBits == GetTheTriforce.HOLE_BIT)
-                    ((Chicken)fixA.getUserData()).destroy();
-                else
-                    ((Chicken)fixB.getUserData()).destroy();
-
-                break;
-            */
         }
     }
 
