@@ -1,10 +1,16 @@
 package com.tapsi.getthetriforce.scenes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -31,6 +37,10 @@ public class Hud implements Disposable{
     private Label countdownLabel, timeLabel, linkLabel;
     private static Label scoreLabel;
 
+
+    private Image exitImg;
+    private boolean exitPressed;
+
     public Hud (SpriteBatch sb){
         //define tracking variables
         worldTimer = 250;
@@ -56,12 +66,18 @@ public class Hud implements Disposable{
         timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         linkLabel = new Label("LINK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
+        //define Image for exiting the Game while playing
+
+
+
         //add labels to table, padding the top, and giving them all equal width with expandX
         table.add(linkLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
+        table.add(exitImg).expandX().padTop(10);
         table.row();
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
+        table.add().expandX();
 
         //add table to the stage
         stage.addActor(table);
@@ -90,5 +106,8 @@ public class Hud implements Disposable{
     public void dispose() { stage.dispose(); }
 
     public boolean isTimeUp() { return timeUp; }
+
+
+
 
 }

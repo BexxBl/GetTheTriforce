@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 
 
 /**
@@ -26,10 +27,10 @@ public class Controls implements Disposable{
     private Viewport viewport;
     private OrthographicCamera cam;
 
-    private Image upImg, leftImg, rightImg;
-    boolean upPressed, leftPressed, rightPressed;
+    private Image upImg, leftImg, rightImg, exitImg;
+    boolean upPressed, leftPressed, rightPressed, exitPressed;
 
-    public Controls (GetTheTriforce game){
+    public Controls (final GetTheTriforce game){
         this.game =game;
         cam = new OrthographicCamera();
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, cam);
@@ -50,6 +51,8 @@ public class Controls implements Disposable{
                     case Input.Keys.RIGHT:
                         rightPressed = true;
                         break;
+                    case Input.Keys.E:
+                        exitPressed = true;
                 }
                 return true;
             }
@@ -66,6 +69,8 @@ public class Controls implements Disposable{
                     case Input.Keys.RIGHT:
                         rightPressed = false;
                         break;
+                    case Input.Keys.E:
+                        exitPressed =false;
 
                 }
                 return true;
@@ -131,10 +136,27 @@ public class Controls implements Disposable{
             }
         });
 
+        exitImg = new Image(new Texture("controls/x.png"));
+        exitImg.setSize(16, 16);
+        exitImg.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                exitPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                exitPressed = false;
+            }
+        });
+
         //fill table
         tablel.add(leftImg).size(upImg.getWidth(), upImg.getHeight()).bottom();
         tablel.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).bottom();
         tablel.add(upImg).size(upImg.getWidth(),upImg.getHeight()).expand().bottom().right();
+        tablel.add(exitImg).size(upImg.getWidth(), upImg.getHeight()).bottom().right();
 
         //add table to stage
         stage.addActor(tablel);
@@ -144,13 +166,14 @@ public class Controls implements Disposable{
     public boolean isUpPressed() {
         return upPressed;
     }
-
     public boolean isLeftPressed() {
         return leftPressed;
     }
-
     public boolean isRightPressed() {
         return rightPressed;
+    }
+    public boolean isExitPressed() {
+        return exitPressed;
     }
 
 
