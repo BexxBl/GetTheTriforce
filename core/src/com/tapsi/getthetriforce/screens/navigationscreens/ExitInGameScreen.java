@@ -70,7 +70,7 @@ public class ExitInGameScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //set Game to Level 1-1
-                game.setScreen(new ChangeScreen(game));
+                game.setScreen(new LevelScreen(game));
                 dispose();
             }
         });
@@ -85,7 +85,7 @@ public class ExitInGameScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelScreen(game));
+                game.setScreen(new ReallyWantToLeaveScreen(game));
                 dispose();
             }
         });
