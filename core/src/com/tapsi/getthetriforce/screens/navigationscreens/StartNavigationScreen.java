@@ -55,7 +55,7 @@ public class StartNavigationScreen implements Screen {
         buttonStyle.fontColor = WHITE;
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("Choose from these levels",fontHeading);
+        selectionLabel = new Label("WELCOME TO GET THE TRIFORCE",fontHeading);
 
         startTB = new TextButton("- Start a new Game",buttonStyle);
         levelSelectTB = new TextButton("- Select a level",buttonStyle);

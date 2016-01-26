@@ -45,7 +45,7 @@ public class IntroScreen implements Screen {
         table.setFillParent(true);
 
         Label welcomeLabel = new Label("Welcome to ", font);
-        Label textLabel = new Label("TITLE", font);
+        Label textLabel = new Label("GET THE TRIFORCE ", font);
 
 
         table.add(welcomeLabel).expandX();

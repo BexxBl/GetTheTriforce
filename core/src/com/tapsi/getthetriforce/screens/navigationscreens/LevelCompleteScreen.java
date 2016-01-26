@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -29,6 +30,7 @@ public class LevelCompleteScreen implements Screen{
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
+    private ParticleEffect particleEffect;
 
     public LevelCompleteScreen(final GetTheTriforce game) {
 
@@ -47,6 +49,12 @@ public class LevelCompleteScreen implements Screen{
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
+        //setting up the ParticleEffect
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("particle/v1red.party"), Gdx.files.internal(""));
+        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
+        particleEffect.start();
+
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -54,11 +62,12 @@ public class LevelCompleteScreen implements Screen{
         Label completeLabel = new Label("You completed the Level", font);
         Label descionLabel = new Label("Do you want to", font);
         TextButton nextLevelTB = new TextButton("- Go to the next Level",buttonStyle);
+        TextButton selectLevelTB = new TextButton("- Select a new Level", buttonStyle);
         TextButton exitGameTB = new TextButton("- Exit the Game", buttonStyle);
 
         //setting up the listener
 
-        nextLevelTB.addListener(new InputListener() {
+        /*nextLevelTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -67,6 +76,19 @@ public class LevelCompleteScreen implements Screen{
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new LevelCompleteScreen(game));
+                dispose();
+            }
+        });*/
+
+        selectLevelTB.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new LevelSelectionScreen(game));
                 dispose();
             }
         });
@@ -88,6 +110,8 @@ public class LevelCompleteScreen implements Screen{
         table.row();
         table.add(descionLabel);
         table.row();
+        table.add(selectLevelTB).expandX().padTop(10f);
+        table.row();
         table.add(nextLevelTB).expandX().padTop(10f);
         table.row();
         table.add(exitGameTB).expandX().padTop(10f);
@@ -104,10 +128,17 @@ public class LevelCompleteScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        particleEffect.update(Gdx.graphics.getDeltaTime());
+
         sb.begin();
-        sb.draw(texture,0,0);
+        sb.draw(texture, 0, 0);
+        particleEffect.draw(sb);
         sb.end();
         stage.draw();
+
+        if (particleEffect.isComplete()){
+            particleEffect.reset();
+        }
 
     }
 
@@ -135,5 +166,6 @@ public class LevelCompleteScreen implements Screen{
     public void dispose() {
         stage.dispose();
         texture.dispose();
+        particleEffect.dispose();
     }
 }

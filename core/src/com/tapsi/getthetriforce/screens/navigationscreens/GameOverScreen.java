@@ -140,6 +140,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         public void dispose() {
             stage.dispose();
             texture.dispose();
+
         }
     }
 
