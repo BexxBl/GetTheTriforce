@@ -2,6 +2,7 @@ package com.tapsi.getthetriforce.screens.navigationscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,48 +18,47 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Creates a navigationscreen that shows up when the timer is 0
+ * Creates the screen between the levels
  */
-public class TimeUpScreen implements Screen {
-
+public class LevelCompleteScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
-
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private Label gameOverLabel, sorryLabel;
 
-    public TimeUpScreen(final GetTheTriforce game){
+    public LevelCompleteScreen(final GetTheTriforce game) {
+
+
         this.game = game;
-        sb= game.batch;
+        sb = game.batch;
 
-        //initialize viewport and stage
+        texture= new Texture("textures/back.jpg");
+
+
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        //setting up the backgroundImage
-        texture = new Texture("textures/back.jpg");
-
-        //setting up the style of the label and textbutton
-        Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
-        Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
-
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
-        //creating the textlabels & buttons incl. listener
-        gameOverLabel = new Label("TIME IS UP", fontGameOver);
-        sorryLabel = new Label("You have reached the time limit for this level. Please: ", fontGameOver);
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
 
+        Label completeLabel = new Label("You completed the Level", font);
+        Label descionLabel = new Label("Do you want to", font);
+        TextButton nextLevelTB = new TextButton("- Go to the next Level",buttonStyle);
+        TextButton exitGameTB = new TextButton("- Exit the Game", buttonStyle);
 
-        TextButton changeLevelTB= new TextButton("- Change the Level", buttonStyle);
-        changeLevelTB.addListener(new InputListener(){
+        //setting up the listener
+
+        nextLevelTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -66,13 +66,12 @@ public class TimeUpScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                game.setScreen(new LevelCompleteScreen(game));
+                dispose();
             }
         });
 
-
-        TextButton exitTB = new TextButton("- Exit the Game", buttonStyle);
-        exitTB.addListener(new InputListener() {
+        exitGameTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -85,28 +84,20 @@ public class TimeUpScreen implements Screen {
             }
         });
 
-
-
-        //creating & filling the table
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
-        table.add(gameOverLabel).expandX();
+        table.add(completeLabel).expandX();
         table.row();
-        table.add(sorryLabel).expandX().padTop(10f);
+        table.add(descionLabel);
         table.row();
-        table.add(changeLevelTB).expandX().padTop(10f);
+        table.add(nextLevelTB).expandX().padTop(10f);
         table.row();
-        table.add(exitTB).expandX().padTop(20f);
+        table.add(exitGameTB).expandX().padTop(10f);
 
-        //adding table to stage
         stage.addActor(table);
     }
 
     @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
+    public void show() { Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
@@ -114,9 +105,10 @@ public class TimeUpScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.begin();
-        sb.draw(texture, 0, 0);
+        sb.draw(texture,0,0);
         sb.end();
         stage.draw();
+
     }
 
     @Override

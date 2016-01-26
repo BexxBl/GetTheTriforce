@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -55,10 +54,10 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
             //creating the textlabels & buttons incl. listener
             gameOverLabel = new Label("GAME OVER", fontGameOver);
-            sorryLabel = new Label("You have been killed unfortunately. Please: ", fontGameOver);
+            sorryLabel = new Label("You have been killed unfortunately. Do you want to: ", fontGameOver);
 
 
-            TextButton exitTB = new TextButton("Exit the Game", buttonStyle);
+            TextButton exitTB = new TextButton("- Exit the Game", buttonStyle);
             exitTB.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -72,7 +71,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
-            TextButton changeLevelTB= new TextButton("Change Level", buttonStyle);
+            TextButton changeLevelTB= new TextButton("- Change the Level", buttonStyle);
             changeLevelTB.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -81,7 +80,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new LevelScreen(game));
+                    game.setScreen(new LevelSelectionScreen(game));
                 }
             });
 

@@ -15,13 +15,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.navigationscreens.ChangeScreen;
-import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.LevelCompleteScreen;
 import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
 
 
 /**
@@ -381,7 +378,7 @@ public class Link extends Sprite {
     }
 
     public void endMethod() {
-        game.setScreen(new ChangeScreen(game));
+        game.setScreen(new LevelCompleteScreen(game));
     }
 
 

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -58,7 +56,7 @@ public class ReallyWantToLeaveScreen implements Screen{
         headingLabel = new Label("Do you really want to leave?", fontEnd);
 
         //setting up the Buttons
-        yesTB = new TextButton("NO", buttonStyle);
+        yesTB = new TextButton("- NO", buttonStyle);
         yesTB.addListener(new InputListener(){
 
             @Override
@@ -68,7 +66,7 @@ public class ReallyWantToLeaveScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new StartScreen(game));
+                game.setScreen(new IntroScreen(game));
             }
         });
 
@@ -76,7 +74,7 @@ public class ReallyWantToLeaveScreen implements Screen{
 
 
 
-        noTB = new TextButton("YES", buttonStyle);
+        noTB = new TextButton("- YES", buttonStyle);
         noTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

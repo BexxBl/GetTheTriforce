@@ -11,7 +11,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
-import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.IntroScreen;
 
 
 /*
@@ -66,7 +66,7 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 		manager.finishLoading();
 
 		//setting the first screen we see to the startscreen
-		setScreen(new StartScreen(this));
+		setScreen(new IntroScreen(this));
 
 		//disabling the back key
 		Gdx.input.setCatchBackKey(true);

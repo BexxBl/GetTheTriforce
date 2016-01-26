@@ -19,7 +19,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 /**
  * Screen the loads at the start of opening the app
  */
-public class StartScreen implements Screen {
+public class IntroScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
@@ -28,7 +28,7 @@ public class StartScreen implements Screen {
     private Texture texture;
     private Music music;
 
-    public StartScreen(GetTheTriforce game){
+    public IntroScreen(GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
@@ -45,7 +45,7 @@ public class StartScreen implements Screen {
         table.setFillParent(true);
 
         Label welcomeLabel = new Label("Welcome to ", font);
-        Label textLabel = new Label("GET THE TRIFORCE", font);
+        Label textLabel = new Label("TITLE", font);
 
 
         table.add(welcomeLabel).expandX();
@@ -69,7 +69,7 @@ public class StartScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.justTouched()) {
-            game.setScreen(new LevelScreen((GetTheTriforce) game));
+            game.setScreen(new StartNavigationScreen(game));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);

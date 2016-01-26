@@ -24,7 +24,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Creates a screen to select a level
  */
-public class LevelScreen implements Screen {
+public class LevelSelectionScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
@@ -34,10 +34,10 @@ public class LevelScreen implements Screen {
     private Table table;
 
     private Label.LabelStyle fontHeading;
-    private Label selectionLabel;
-    private TextButton level1TB, level2TB, level3TB, exitTB;
+    private Label selectionLabel, lineLabel;
+    private TextButton level1TB, level2TB, level3TB, exitTB, gobackTB;
 
-    public LevelScreen (final GetTheTriforce game){
+    public LevelSelectionScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
@@ -57,11 +57,17 @@ public class LevelScreen implements Screen {
         //creating the Labels & Buttons
         selectionLabel = new Label("Choose from these levels",fontHeading);
 
-        level1TB = new TextButton("Level 1",buttonStyle);
-        level2TB = new TextButton("Level 2",buttonStyle);
-        level3TB = new TextButton("Level 3",buttonStyle);
+        level1TB = new TextButton("- Level 1",buttonStyle);
+        level2TB = new TextButton("- Level 2",buttonStyle);
+        level3TB = new TextButton("- Level 3",buttonStyle);
 
-        exitTB = new TextButton("Exit Game",buttonStyle);
+        lineLabel = new Label("--------------------",fontHeading);
+
+
+        gobackTB = new TextButton("- Go back to Start",buttonStyle);
+
+
+        exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
         level1TB.addListener(new InputListener(){
@@ -104,6 +110,18 @@ public class LevelScreen implements Screen {
             }
         });
 
+        gobackTB.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                //go back to the StartNavigationScreen
+                game.setScreen(new StartNavigationScreen(game));
+                dispose();
+            }
+        });
 
         exitTB.addListener(new InputListener() {
             @Override
@@ -131,6 +149,10 @@ public class LevelScreen implements Screen {
         table.add(level2TB);
         table.row();
         table.add(level3TB);
+        table.row();
+        table.add(lineLabel);
+        table.row();
+        table.add(gobackTB).padTop(10f);
         table.row();
         table.add(exitTB).expand();
 

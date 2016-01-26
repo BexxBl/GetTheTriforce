@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -35,7 +34,7 @@ public class ExitInGameScreen implements Screen {
 
     private Label.LabelStyle fontHeading;
     private Label selectionLabel;
-    private TextButton changeLevelTB, exitTB;
+    private TextButton changeLevelTB, exitTB, returnTB;
 
     public ExitInGameScreen(final GetTheTriforce game){
         this.game = game;
@@ -56,12 +55,26 @@ public class ExitInGameScreen implements Screen {
 
         //creating the Labels & Buttons
         selectionLabel = new Label("Do you want to: ",fontHeading);
-
-        changeLevelTB = new TextButton("Change the Level",buttonStyle);
-
-        exitTB = new TextButton("Exit the Game",buttonStyle);
+        //returnTB = new TextButton("Return to the Level",buttonStyle);
+        changeLevelTB = new TextButton("- Change the Level",buttonStyle);
+        exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
+
+        //Return Button is a future feature
+        /*returnTB.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                //set Screen back to the current game
+
+                dispose();
+            }
+        });*/
+
         changeLevelTB.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -69,8 +82,7 @@ public class ExitInGameScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //set Game to Level 1-1
-                game.setScreen(new LevelScreen(game));
+                game.setScreen(new LevelSelectionScreen(game));
                 dispose();
             }
         });
