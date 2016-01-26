@@ -67,7 +67,7 @@ public class ChangeScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game,"level/level2.tmx"));
+                game.setScreen(new ChangeScreen(game));
                 dispose();
             }
         });

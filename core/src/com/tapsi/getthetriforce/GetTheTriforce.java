@@ -4,18 +4,15 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.tapsi.getthetriforce.scenes.Controls;
-import com.tapsi.getthetriforce.screens.navigationscreens.EndScreen;
+
 import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.StartScreen;
 
-import java.awt.event.KeyEvent;
 
 /*
  * Main Game Class
@@ -73,6 +70,7 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 
 		//disabling the back key
 		Gdx.input.setCatchBackKey(true);
+
 		if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
 			setScreen(new ReallyWantToLeaveScreen(this));
 		}

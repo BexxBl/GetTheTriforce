@@ -17,6 +17,7 @@ import com.tapsi.getthetriforce.sprites.enemies.Kid;
 import com.tapsi.getthetriforce.sprites.tileObjects.Brick;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
+import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
 import com.tapsi.getthetriforce.sprites.tileObjects.Stone;
 
 /**
@@ -87,9 +88,14 @@ public class B2WorldCreator {
             new Stone(screen, object);
         }
 
-        //create the Ches at the end
+        //create the Chest at the end
         for(MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
             new Chest(screen,object);
+        }
+
+        //create the Holes in the Ground
+        for(MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)){
+            new Hole(screen,object);
         }
 
         //create all chickens
@@ -105,7 +111,10 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             kids.add(new Kid(screen, rect.getX() / GetTheTriforce.PPM, rect.getY() / GetTheTriforce.PPM));
         }
+
+
     }
+
 
     public Array<Chicken> getChickens() {
         return chickens;
@@ -116,4 +125,5 @@ public class B2WorldCreator {
         enemies.addAll(kids);
         return enemies;
     }
+
 }

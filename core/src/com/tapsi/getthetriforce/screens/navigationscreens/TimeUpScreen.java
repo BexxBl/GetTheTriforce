@@ -57,19 +57,6 @@ public class TimeUpScreen implements Screen {
         gameOverLabel = new Label("TIME IS UP", fontGameOver);
         sorryLabel = new Label("You have reached the time limit for this level. Please: ", fontGameOver);
 
-        TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
-        playAgainTB.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen((GetTheTriforce) game, "level/level1.tmx"));
-                dispose();
-            }
-        });
 
         TextButton changeLevelTB= new TextButton("Change Level", buttonStyle);
         changeLevelTB.addListener(new InputListener(){
@@ -109,8 +96,6 @@ public class TimeUpScreen implements Screen {
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(sorryLabel).expandX().padTop(10f);
-        table.row();
-        table.add(playAgainTB).expandX().padTop(10f);
         table.row();
         table.add(changeLevelTB).expandX().padTop(10f);
         table.row();

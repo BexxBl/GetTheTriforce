@@ -10,6 +10,7 @@ import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.link.Link;
 import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
+import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
 import com.tapsi.getthetriforce.sprites.tileObjects.InteractiveTileObject;
 
 /**
@@ -26,7 +27,7 @@ public class WorldContactListener implements ContactListener{
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef){
-            case GetTheTriforce.LINK_HEAD_BIT | GetTheTriforce.BRICK_BIT:
+           case GetTheTriforce.LINK_HEAD_BIT | GetTheTriforce.BRICK_BIT:
             case GetTheTriforce.LINK_HEAD_BIT | GetTheTriforce.STONE_BIT:
                 if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_HEAD_BIT)
                     ((InteractiveTileObject) fixB.getUserData()).onHeadHit((Link) fixA.getUserData());
@@ -69,15 +70,20 @@ public class WorldContactListener implements ContactListener{
                 ((Enemy)fixB.getUserData()).hitByEnemy((Enemy)fixA.getUserData());
                 break;
 
-
             case GetTheTriforce.LINK_BIT | GetTheTriforce.END_BIT:
                 if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
                     ((Link)fixA.getUserData()).endMethod();
                 else
                     ((Link)fixB.getUserData()).endMethod();
-
                 break;
 
+            case GetTheTriforce.LINK_BIT | GetTheTriforce.HOLE_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.LINK_BIT)
+                    ((Link)fixA.getUserData()).die();
+                else
+                    ((Link)fixB.getUserData()).die();
+                break;
+            // fixed by code king manuel(Take that BIAAAAATCH)!!!!!
 
         }
     }

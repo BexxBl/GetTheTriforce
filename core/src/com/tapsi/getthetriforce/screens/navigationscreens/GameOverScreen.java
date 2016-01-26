@@ -57,20 +57,6 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             gameOverLabel = new Label("GAME OVER", fontGameOver);
             sorryLabel = new Label("You have been killed unfortunately. Please: ", fontGameOver);
 
-            TextButton playAgainTB = new TextButton("Try Again", buttonStyle);
-            playAgainTB.addListener(new InputListener() {
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
-
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new PlayScreen((GetTheTriforce) game, "levels/level1.tmx"));
-                    dispose();
-                }
-            });
-
 
             TextButton exitTB = new TextButton("Exit the Game", buttonStyle);
             exitTB.addListener(new InputListener() {
@@ -107,8 +93,6 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             table.add(gameOverLabel).expandX();
             table.row();
             table.add(sorryLabel).expandX().padTop(10f);
-            table.row();
-            table.add(playAgainTB).expandX().padTop(10f);
             table.row();
             table.add(changeLevelTB).expandX().padTop(10f);
             table.row();
