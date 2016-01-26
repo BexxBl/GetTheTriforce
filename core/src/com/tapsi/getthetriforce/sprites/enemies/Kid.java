@@ -112,6 +112,9 @@ public class Kid extends Enemy{
 
         reverseVelocity(true, false);
     }
+    public void destroy(){
+        setToDestroy= true;
+    }
 
 
 }

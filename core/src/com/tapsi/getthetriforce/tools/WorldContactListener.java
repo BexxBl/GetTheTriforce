@@ -6,7 +6,9 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.sprites.enemies.Chicken;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
+import com.tapsi.getthetriforce.sprites.enemies.Kid;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.link.Link;
 import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
@@ -83,8 +85,40 @@ public class WorldContactListener implements ContactListener{
                 else
                     ((Link)fixB.getUserData()).die();
                 break;
-            // fixed by code king manuel(Take that BIAAAAATCH)!!!!!
 
+
+            case GetTheTriforce.ITEM_BIT | GetTheTriforce.HOLE_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.ITEM_BIT)
+                    ((Item)fixA.getUserData()).destroy();
+                else
+                    ((Item)fixB.getUserData()).destroy();
+                break;
+
+            case GetTheTriforce.ENEMY_BIT | GetTheTriforce.HOLE_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.ENEMY_BIT)
+                    ((Enemy)fixA.getUserData()).destroy();
+                else
+                    ((Enemy)fixB.getUserData()).destroy();
+
+                break;
+
+            /*
+            case GetTheTriforce.ENEMY_BIT | GetTheTriforce.HOLE_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.ENEMY_BIT)
+                    ((Kid)fixA.getUserData()).destroy();
+                else
+                    ((Kid)fixB.getUserData()).destroy();
+
+                break;
+
+            case GetTheTriforce.ENEMY_BIT | GetTheTriforce.HOLE_BIT:
+                if(fixA.getFilterData().categoryBits == GetTheTriforce.HOLE_BIT)
+                    ((Chicken)fixA.getUserData()).destroy();
+                else
+                    ((Chicken)fixB.getUserData()).destroy();
+
+                break;
+            */
         }
     }
 

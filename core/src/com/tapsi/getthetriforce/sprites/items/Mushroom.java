@@ -55,5 +55,6 @@ public class Mushroom extends Item {
         setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
         velocity.y = body.getLinearVelocity().y;
         body.setLinearVelocity(velocity);
+
     }
 }
