@@ -20,7 +20,6 @@ import com.tapsi.getthetriforce.sprites.tileObjects.InteractiveTileObject;
  */
 public class WorldContactListener implements ContactListener{
 
-    private GetTheTriforce game;
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
