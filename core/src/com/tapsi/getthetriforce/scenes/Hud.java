@@ -101,7 +101,4 @@ public class Hud implements Disposable{
     public boolean isTimeUp() { return timeUp; }
 
 
-
-
-
 }
