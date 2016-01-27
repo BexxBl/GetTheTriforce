@@ -19,8 +19,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.navigationscreens.ExitInGameScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
+import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 import com.tapsi.getthetriforce.sprites.items.Item;
@@ -48,6 +48,7 @@ public class PlayScreen implements Screen{
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
+
 
     //Controller variables
     private Controls controls;
@@ -114,7 +115,7 @@ public class PlayScreen implements Screen{
         music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
         music.setLooping(true);
         music.setVolume(0.3f);
-        music.play();
+        //music.play();
 
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingQueue<ItemDef>();
@@ -153,17 +154,18 @@ public class PlayScreen implements Screen{
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (controls.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-            if (controls.isExitPressed()){
-                game.setScreen(new ExitInGameScreen(game));
-            }
+            if (controls.isExitPressed())
+                game.setScreen(new ReallyWantToLeaveScreen(game));
+
         }
     }
+
+
 
 
     public void update(float dt){
         //handle user input first
         handleInput(dt);
-
         handleSpawningItems();
 
         //takes 1 step in the physics simulation(60 times per second)
@@ -184,6 +186,7 @@ public class PlayScreen implements Screen{
             item.update(dt);
 
         hud.update(dt);
+
 
         //attach gameCam to players.x coordinate
         if(player.currentState != Link.State.DEAD) {
@@ -228,15 +231,15 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
+        //set batch to draw the Exit Button in Game
+        //exitInGame.stage.draw();
+
+
         //draw controls when using android
         if(Gdx.app.getType() == Application.ApplicationType.Android){
-            controls.stage.draw();
+            controls.draw();
         }
 
-        //draw controls when using ios
-        if(Gdx.app.getType() == Application.ApplicationType.iOS){
-            controls.stage.draw();
-        }
 
         //if link is dead--> set Screen to the GameOverScreen
         if(gameOver()){

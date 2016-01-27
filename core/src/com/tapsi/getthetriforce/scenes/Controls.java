@@ -23,7 +23,7 @@ import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScree
 public class Controls implements Disposable{
 
     private GetTheTriforce game;
-    public Stage stage;
+    private Stage stage;
     private Viewport viewport;
     private OrthographicCamera cam;
 
@@ -37,11 +37,11 @@ public class Controls implements Disposable{
         stage = new Stage(viewport, game.batch);
 
         //listening to keyboard input
-        stage.addListener(new InputListener(){
+        stage.addListener(new InputListener() {
 
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
-                switch(keycode){
+                switch (keycode) {
                     case Input.Keys.UP:
                         upPressed = true;
                         break;
@@ -53,13 +53,14 @@ public class Controls implements Disposable{
                         break;
                     case Input.Keys.E:
                         exitPressed = true;
+
                 }
                 return true;
             }
 
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
-                switch(keycode) {
+                switch (keycode) {
                     case Input.Keys.UP:
                         upPressed = false;
                         break;
@@ -70,7 +71,9 @@ public class Controls implements Disposable{
                         rightPressed = false;
                         break;
                     case Input.Keys.E:
-                        exitPressed =false;
+                        exitPressed = false;
+                        break;
+
 
                 }
                 return true;
@@ -80,15 +83,11 @@ public class Controls implements Disposable{
         //set the input processor to the stage
         Gdx.input.setInputProcessor(stage);
 
-        //define a table used to organize control elements
-        Table tablel = new Table();
-        //Top-Align table
-        tablel.left().bottom();
-        tablel.setSize(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT);
+
 
         //setup images + listener
-        upImg = new Image(new Texture("controls/up1.png"));
-        upImg.setSize(50, 50);
+        upImg = new Image(new Texture("controls/up.png"));
+        upImg.setSize(40, 40);
         upImg.addListener(new InputListener() {
 
             @Override
@@ -104,8 +103,8 @@ public class Controls implements Disposable{
         });
 
 
-        leftImg = new Image(new Texture("controls/left1.png"));
-        leftImg.setSize(50, 50);
+        leftImg = new Image(new Texture("controls/left.png"));
+        leftImg.setSize(40, 40);
         leftImg.addListener(new InputListener() {
 
             @Override
@@ -120,8 +119,8 @@ public class Controls implements Disposable{
             }
         });
 
-        rightImg = new Image(new Texture("controls/right1.png"));
-        rightImg.setSize(50, 50);
+        rightImg = new Image(new Texture("controls/right.png"));
+        rightImg.setSize(40, 40);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -136,8 +135,17 @@ public class Controls implements Disposable{
             }
         });
 
+        //define a table used to organize control elements
+        Table tablel = new Table();
+        tablel.left().bottom();
+        tablel.setSize(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT);
+        tablel.add(leftImg).size(upImg.getWidth(), upImg.getHeight()).bottom();
+        tablel.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).bottom();
+        tablel.add(upImg).size(upImg.getWidth(),upImg.getHeight()).expand().bottom().right();
+
+        //setup exit Image in right top corner
         exitImg = new Image(new Texture("controls/x.png"));
-        exitImg.setSize(16, 16);
+        exitImg.setSize(40, 40);
         exitImg.addListener(new InputListener() {
 
             @Override
@@ -152,13 +160,35 @@ public class Controls implements Disposable{
             }
         });
 
-        //fill table
-        tablel.add(leftImg).size(upImg.getWidth(), upImg.getHeight()).bottom();
-        tablel.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight()).bottom();
-        tablel.add(upImg).size(upImg.getWidth(),upImg.getHeight()).expand().bottom().right();
-        tablel.add(exitImg).size(upImg.getWidth(), upImg.getHeight()).bottom().right();
+        stage.addListener(new InputListener() {
+
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                switch (keycode) {
+                    case Input.Keys.E:
+                        exitPressed = true;
+                }
+                return true;
+            }
+
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                switch (keycode) {
+                    case Input.Keys.E:
+                        exitPressed = false;
+                }
+                return true;
+            }
+        });
+
+        Table tabler = new Table();
+        tabler.right().top();
+        tabler.setSize(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT);
+        tabler.add(exitImg).size(exitImg.getWidth(), exitImg.getHeight()).bottom();
+
 
         //add table to stage
+        stage.addActor(tabler);
         stage.addActor(tablel);
 
     }
@@ -172,9 +202,7 @@ public class Controls implements Disposable{
     public boolean isRightPressed() {
         return rightPressed;
     }
-    public boolean isExitPressed() {
-        return exitPressed;
-    }
+    public boolean isExitPressed(){return exitPressed;}
 
 
     public void draw(){

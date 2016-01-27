@@ -53,6 +53,12 @@ public class Hud implements Disposable{
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
+        //define labels using the String, and a Label style consisting of a font and color
+        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        linkLabel = new Label("LINK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
         //define a table used to organize hud's labels
         Table table = new Table();
         //Top-Align table
@@ -60,25 +66,12 @@ public class Hud implements Disposable{
         //make the table fill the entire stage
         table.setFillParent(true);
 
-        //define labels using the String, and a Label style consisting of a font and color
-        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        linkLabel = new Label("LINK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-        //define Image for exiting the Game while playing
-
-
-
         //add labels to table, padding the top, and giving them all equal width with expandX
         table.add(linkLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);
-        table.add(exitImg).expandX().padTop(10);
         table.row();
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
-        table.add().expandX();
-
         //add table to the stage
         stage.addActor(table);
 
@@ -106,6 +99,7 @@ public class Hud implements Disposable{
     public void dispose() { stage.dispose(); }
 
     public boolean isTimeUp() { return timeUp; }
+
 
 
 

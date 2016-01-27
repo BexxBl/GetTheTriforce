@@ -30,7 +30,6 @@ public class LevelCompleteScreen implements Screen{
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private ParticleEffect particleEffect;
 
     public LevelCompleteScreen(final GetTheTriforce game) {
 
@@ -49,11 +48,6 @@ public class LevelCompleteScreen implements Screen{
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
-        //setting up the ParticleEffect
-        particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("particle/v1red.party"), Gdx.files.internal(""));
-        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
-        particleEffect.start();
 
         Table table = new Table();
         table.center();
@@ -128,17 +122,11 @@ public class LevelCompleteScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        particleEffect.update(Gdx.graphics.getDeltaTime());
-
         sb.begin();
         sb.draw(texture, 0, 0);
-        particleEffect.draw(sb);
         sb.end();
         stage.draw();
 
-        if (particleEffect.isComplete()){
-            particleEffect.reset();
-        }
 
     }
 
@@ -166,6 +154,5 @@ public class LevelCompleteScreen implements Screen{
     public void dispose() {
         stage.dispose();
         texture.dispose();
-        particleEffect.dispose();
     }
 }
