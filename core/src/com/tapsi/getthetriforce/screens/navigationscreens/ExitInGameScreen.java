@@ -34,7 +34,7 @@ public class ExitInGameScreen implements Screen {
 
     private Label.LabelStyle fontHeading;
     private Label selectionLabel;
-    private TextButton changeLevelTB, exitTB, returnTB;
+    private TextButton changeLevelTB, exitTB, returnTB, backtostartTB;
 
     public ExitInGameScreen(final GetTheTriforce game){
         this.game = game;
@@ -57,6 +57,8 @@ public class ExitInGameScreen implements Screen {
         selectionLabel = new Label("Do you want to: ",fontHeading);
         //returnTB = new TextButton("Return to the Level",buttonStyle);
         changeLevelTB = new TextButton("- Change the Level",buttonStyle);
+        backtostartTB = new TextButton("- Back to the Startmenu", buttonStyle);
+
         exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
@@ -74,6 +76,20 @@ public class ExitInGameScreen implements Screen {
                 dispose();
             }
         });*/
+
+        backtostartTB.addListener(new InputListener(){
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new StartNavigationScreen(game));
+                dispose();
+            }
+        });
 
         changeLevelTB.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

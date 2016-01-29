@@ -35,7 +35,7 @@ public class LevelSelectionScreen implements Screen {
 
     private Label.LabelStyle fontHeading;
     private Label selectionLabel, lineLabel;
-    private TextButton level1TB, level2TB, level3TB, exitTB, gobackTB;
+    private TextButton level1TB, level2TB, level3TB, gobackTB;
 
     public LevelSelectionScreen(final GetTheTriforce game){
         this.game = game;
@@ -66,8 +66,6 @@ public class LevelSelectionScreen implements Screen {
 
         gobackTB = new TextButton("- Go back to Start",buttonStyle);
 
-
-        exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
         level1TB.addListener(new InputListener(){
@@ -123,18 +121,6 @@ public class LevelSelectionScreen implements Screen {
             }
         });
 
-        exitTB.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new ReallyWantToLeaveScreen(game));
-                dispose();
-            }
-        });
 
 
         //creating and filling table
@@ -153,8 +139,7 @@ public class LevelSelectionScreen implements Screen {
         table.add(lineLabel);
         table.row();
         table.add(gobackTB).padTop(10f);
-        table.row();
-        table.add(exitTB).expand();
+
 
         stage.addActor(table);
 

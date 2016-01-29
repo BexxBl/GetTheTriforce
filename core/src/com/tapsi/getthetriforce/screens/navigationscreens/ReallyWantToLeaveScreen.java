@@ -56,8 +56,8 @@ public class ReallyWantToLeaveScreen implements Screen{
         headingLabel = new Label("Do you really want to leave?", fontEnd);
 
         //setting up the Buttons
-        yesTB = new TextButton("- NO", buttonStyle);
-        yesTB.addListener(new InputListener(){
+        noTB = new TextButton("- NO", buttonStyle);
+        noTB.addListener(new InputListener(){
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -66,16 +66,13 @@ public class ReallyWantToLeaveScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new IntroScreen(game));
+                game.setScreen(new StartNavigationScreen(game));
             }
         });
 
 
-
-
-
-        noTB = new TextButton("- YES", buttonStyle);
-        noTB.addListener(new InputListener() {
+        yesTB = new TextButton("- YES", buttonStyle);
+        yesTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
