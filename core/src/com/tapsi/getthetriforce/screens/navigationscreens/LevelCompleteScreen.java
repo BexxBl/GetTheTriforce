@@ -30,6 +30,8 @@ public class LevelCompleteScreen implements Screen{
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
+    private TextButton selectLevelTB, exitGameTB;
+    private Label completeLabel, descionLabel;
 
     public LevelCompleteScreen(final GetTheTriforce game) {
 
@@ -53,26 +55,12 @@ public class LevelCompleteScreen implements Screen{
         table.center();
         table.setFillParent(true);
 
-        Label completeLabel = new Label("You completed the Level", font);
-        Label descionLabel = new Label("Do you want to", font);
-        TextButton nextLevelTB = new TextButton("- Go to the next Level",buttonStyle);
-        TextButton selectLevelTB = new TextButton("- Select a new Level", buttonStyle);
-        TextButton exitGameTB = new TextButton("- Exit the Game", buttonStyle);
+        completeLabel = new Label("You completed the Level", font);
+        descionLabel = new Label("Do you want to", font);
+        selectLevelTB = new TextButton("- Select a new Level", buttonStyle);
+        exitGameTB = new TextButton("- Exit the Game", buttonStyle);
 
-        //setting up the listener
 
-        /*nextLevelTB.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelCompleteScreen(game));
-                dispose();
-            }
-        });*/
 
         selectLevelTB.addListener(new InputListener() {
             @Override
@@ -105,8 +93,6 @@ public class LevelCompleteScreen implements Screen{
         table.add(descionLabel);
         table.row();
         table.add(selectLevelTB).expandX().padTop(10f);
-        table.row();
-        table.add(nextLevelTB).expandX().padTop(10f);
         table.row();
         table.add(exitGameTB).expandX().padTop(10f);
 

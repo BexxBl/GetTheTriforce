@@ -37,10 +37,6 @@ public class Hud implements Disposable{
     private Label countdownLabel, timeLabel, linkLabel;
     private static Label scoreLabel;
 
-
-    private Image exitImg;
-    private boolean exitPressed;
-
     public Hud (SpriteBatch sb){
         //define tracking variables
         worldTimer = 250;
