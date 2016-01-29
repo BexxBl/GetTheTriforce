@@ -42,7 +42,7 @@ public class Controls implements Disposable{
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 switch (keycode) {
-                    case Input.Keys.UP:
+                    case Input.Keys.SPACE:
                         upPressed = true;
                         break;
                     case Input.Keys.LEFT:
@@ -61,7 +61,7 @@ public class Controls implements Disposable{
             @Override
             public boolean keyUp(InputEvent event, int keycode) {
                 switch (keycode) {
-                    case Input.Keys.UP:
+                    case Input.Keys.SPACE:
                         upPressed = false;
                         break;
                     case Input.Keys.LEFT:
