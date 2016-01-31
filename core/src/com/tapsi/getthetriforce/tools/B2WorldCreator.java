@@ -16,9 +16,9 @@ import com.tapsi.getthetriforce.sprites.enemies.Chicken;
 import com.tapsi.getthetriforce.sprites.enemies.Kid;
 import com.tapsi.getthetriforce.sprites.tileObjects.Brick;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
+import com.tapsi.getthetriforce.sprites.tileObjects.Door;
 import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
-import com.tapsi.getthetriforce.sprites.tileObjects.Stone;
+import com.tapsi.getthetriforce.sprites.tileObjects.QuestionBlock;
 
 /**
  * Helps to create the gameworld
@@ -85,12 +85,12 @@ public class B2WorldCreator {
 
         //create coin bodies/fixtures
         for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            new Stone(screen, object);
+            new QuestionBlock(screen, object);
         }
 
-        //create the Chest at the end
+        //create the Door at the end
         for(MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)){
-            new Chest(screen,object);
+            new Door(screen,object);
         }
 
         //create the Holes in the Ground

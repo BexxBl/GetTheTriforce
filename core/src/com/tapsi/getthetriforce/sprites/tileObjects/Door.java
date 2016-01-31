@@ -17,7 +17,7 @@ import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 /**
  * Creates the door at the end of the level
  */
-public class Chest {
+public class Door {
 
     protected GetTheTriforce game;
     protected World world;
@@ -32,7 +32,7 @@ public class Chest {
     protected FixtureDef fdef;
     protected PolygonShape shape;
 
-    public Chest(PlayScreen screen, MapObject object) {
+    public Door(PlayScreen screen, MapObject object) {
         this.object = object;
         this.screen = screen;
         this.world = screen.getWorld();

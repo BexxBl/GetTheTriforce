@@ -15,11 +15,11 @@ import com.tapsi.getthetriforce.sprites.link.Link;
  * Creates the Stones that the user will get points for collecting them
  *  handels what happens after collision
  */
-public class Stone extends InteractiveTileObject{
+public class QuestionBlock extends InteractiveTileObject{
     private static TiledMapTileSet tileSet;
     private final int BLANK_COIN = 28;
 
-    public Stone(PlayScreen screen, MapObject object){
+    public QuestionBlock(PlayScreen screen, MapObject object){
         super(screen, object);
         tileSet = map.getTileSets().getTileSet("tileset_gutter");
         fixture.setUserData(this);
@@ -42,7 +42,6 @@ public class Stone extends InteractiveTileObject{
             getCell().setTile(tileSet.getTile(BLANK_COIN));
             Hud.addScore(150);
         }
-        /*getCell().setTile(tileSet.getTile(BLANK_COIN));
-        Hud.addScore(150);*/
+
     }
 }

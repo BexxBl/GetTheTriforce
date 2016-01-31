@@ -6,13 +6,9 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.sprites.enemies.Chicken;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
-import com.tapsi.getthetriforce.sprites.enemies.Kid;
 import com.tapsi.getthetriforce.sprites.items.Item;
 import com.tapsi.getthetriforce.sprites.link.Link;
-import com.tapsi.getthetriforce.sprites.tileObjects.Chest;
-import com.tapsi.getthetriforce.sprites.tileObjects.Hole;
 import com.tapsi.getthetriforce.sprites.tileObjects.InteractiveTileObject;
 
 /**

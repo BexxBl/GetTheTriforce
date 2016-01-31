@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
 import com.tapsi.getthetriforce.sprites.link.Link;
 
@@ -104,6 +105,7 @@ public class Kid extends Enemy{
     public void hitOnHead(Link link) {
         setToDestroy = true;
         GetTheTriforce.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+        Hud.addScore(350);
 
     }
 

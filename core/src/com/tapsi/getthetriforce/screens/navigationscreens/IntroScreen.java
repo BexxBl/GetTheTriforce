@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -28,17 +29,19 @@ public class IntroScreen implements Screen {
     private Texture texture;
     private Music music;
 
+
     public IntroScreen(GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
-        texture= new Texture("textures/back.jpg");
+        texture= new Texture("textures/triforce.png");
 
 
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.GOLDENROD);
 
         Table table = new Table();
         table.center();
@@ -74,10 +77,13 @@ public class IntroScreen implements Screen {
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         sb.begin();
-        sb.draw(texture,0,0);
+        sb.draw(texture, 0, 0);
         sb.end();
         stage.draw();
+
+
 
     }
 
