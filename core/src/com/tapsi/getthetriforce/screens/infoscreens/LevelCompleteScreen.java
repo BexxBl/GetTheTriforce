@@ -1,13 +1,13 @@
-package com.tapsi.getthetriforce.screens.navigationscreens;
+package com.tapsi.getthetriforce.screens.infoscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -17,7 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.exitScreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -32,6 +34,8 @@ public class LevelCompleteScreen implements Screen{
     private Texture texture;
     private TextButton selectLevelTB, exitGameTB;
     private Label completeLabel, descionLabel;
+    private Table table;
+    private Music music;
 
     public LevelCompleteScreen(final GetTheTriforce game) {
 
@@ -50,15 +54,10 @@ public class LevelCompleteScreen implements Screen{
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
-
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-
         completeLabel = new Label("You completed the Level", font);
         descionLabel = new Label("Do you want to", font);
-        selectLevelTB = new TextButton("- Select a new Level", buttonStyle);
-        exitGameTB = new TextButton("- Exit the Game", buttonStyle);
+        selectLevelTB = new TextButton("# Select a new Level", buttonStyle);
+        exitGameTB = new TextButton("# Go back to the Menu", buttonStyle);
 
 
 
@@ -88,6 +87,11 @@ public class LevelCompleteScreen implements Screen{
             }
         });
 
+
+        table = new Table();
+        table.center();
+        table.setFillParent(true);
+
         table.add(completeLabel).expandX();
         table.row();
         table.add(descionLabel);
@@ -97,7 +101,13 @@ public class LevelCompleteScreen implements Screen{
         table.add(exitGameTB).expandX().padTop(10f);
 
         stage.addActor(table);
+
+        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
     }
+
 
     @Override
     public void show() { Gdx.input.setInputProcessor(stage);

@@ -1,7 +1,8 @@
-package com.tapsi.getthetriforce.screens.navigationscreens;
+package com.tapsi.getthetriforce.screens.gameoverscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.exitScreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -32,6 +35,9 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         private SpriteBatch sb;
         private Texture texture;
         private Label gameOverLabel, sorryLabel;
+        private Table table;
+        private TextButton exitTB,changeLevelTB;
+        private Music music;
 
         public GameOverScreen(final GetTheTriforce game){
             this.game = game;
@@ -57,7 +63,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             sorryLabel = new Label("You have been killed unfortunately. Do you want to: ", fontGameOver);
 
 
-            TextButton exitTB = new TextButton("- Exit the Game", buttonStyle);
+            exitTB = new TextButton("# Go back to the Menu", buttonStyle);
             exitTB.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -71,7 +77,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
-            TextButton changeLevelTB= new TextButton("- Change the Level", buttonStyle);
+            changeLevelTB= new TextButton("# Change the Level", buttonStyle);
             changeLevelTB.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -85,7 +91,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             });
 
             //creating & filling the table
-            Table table = new Table();
+            table = new Table();
             table.center();
             table.setFillParent(true);
 
@@ -99,6 +105,11 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
             //adding table to stage
             stage.addActor(table);
+
+            music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
+            music.setLooping(true);
+            music.setVolume(0.3f);
+            music.play();
         }
 
         @Override

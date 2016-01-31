@@ -4,8 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.others.PlayScreen;
 import com.tapsi.getthetriforce.sprites.link.Link;
 
 /**

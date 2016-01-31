@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce;
+package com.tapsi.getthetriforce.mainGameClass;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
@@ -10,8 +10,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
-import com.tapsi.getthetriforce.screens.navigationscreens.IntroScreen;
+import com.tapsi.getthetriforce.screens.exitScreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.screens.infoscreens.IntroScreen;
 
 
 /*
@@ -23,7 +23,6 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 	public static final float PPM = 100 ;
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208 ;
-
 
 	//Box2D Collision Bits
 	public static final short NOTHING_BIT = 0;
@@ -45,7 +44,6 @@ public class GetTheTriforce extends Game implements ApplicationListener {
 
 	//AssetManager to load our music
 	public static AssetManager manager;
-
 
 	@Override
 	public void create () {

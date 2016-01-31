@@ -1,7 +1,8 @@
-package com.tapsi.getthetriforce.screens.navigationscreens;
+package com.tapsi.getthetriforce.screens.others;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -23,7 +24,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Creates a screen to select a level
  */
-public class ExitInGameScreen implements Screen {
+public class LevelSelectionScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
@@ -33,10 +34,12 @@ public class ExitInGameScreen implements Screen {
     private Table table;
 
     private Label.LabelStyle fontHeading;
-    private Label selectionLabel;
-    private TextButton changeLevelTB, exitTB, returnTB, backtostartTB;
+    private Label selectionLabel, lineLabel;
+    private TextButton level1TB, level2TB, level3TB, gobackTB;
 
-    public ExitInGameScreen(final GetTheTriforce game){
+    private Music music;
+
+    public LevelSelectionScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
@@ -54,69 +57,69 @@ public class ExitInGameScreen implements Screen {
         buttonStyle.fontColor = WHITE;
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("Do you want to: ",fontHeading);
-        //returnTB = new TextButton("Return to the Level",buttonStyle);
-        changeLevelTB = new TextButton("- Change the Level",buttonStyle);
-        backtostartTB = new TextButton("- Back to the Startmenu", buttonStyle);
+        selectionLabel = new Label("Choose from these levels",fontHeading);
 
-        exitTB = new TextButton("- Exit the Game",buttonStyle);
+        level1TB = new TextButton("# Level 1",buttonStyle);
+        level2TB = new TextButton("# Level 2",buttonStyle);
+        level3TB = new TextButton("# Level 3",buttonStyle);
+        lineLabel = new Label("--------------------",fontHeading);
+        gobackTB = new TextButton("# Go back to the Menu",buttonStyle);
+
 
         //creating listener for the textButtons
-
-        //Return Button is a future feature
-        /*returnTB.addListener(new InputListener() {
+        level1TB.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //set Screen back to the current game
-
-                dispose();
-            }
-        });*/
-
-        backtostartTB.addListener(new InputListener(){
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new StartNavigationScreen(game));
+                //set Game to Level 1-1
+                game.setScreen(new PlayScreen(game, "level/level1.tmx"));
                 dispose();
             }
         });
 
-        changeLevelTB.addListener(new InputListener() {
+        level2TB.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                //set Game to Level 1-2
+                game.setScreen(new PlayScreen(game, "level/level2.tmx"));
                 dispose();
+
             }
         });
 
-
-
-        exitTB.addListener(new InputListener() {
-            @Override
+        level3TB.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new ReallyWantToLeaveScreen(game));
+                //set Game to Level 1-3
+                game.setScreen(new PlayScreen(game, "level/level3.tmx"));
                 dispose();
             }
         });
+
+        gobackTB.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                //go back to the StartNavigationScreen
+                game.setScreen(new com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen(game));
+                dispose();
+            }
+        });
+
 
 
         //creating and filling table
@@ -124,14 +127,25 @@ public class ExitInGameScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expandX().padTop(10f);
+        table.add(selectionLabel).expandX().padTop(30f);
         table.row();
-        table.add(changeLevelTB).expandX().padTop(10f);
+        table.add(level1TB);
         table.row();
-        table.add(exitTB).expandX().padTop(10f);
+        table.add(level2TB);
+        table.row();
+        table.add(level3TB);
+        table.row();
+        table.add(lineLabel);
+        table.row();
+        table.add(gobackTB).padTop(10f);
+
 
         stage.addActor(table);
 
+        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
     }
 
 

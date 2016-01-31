@@ -12,8 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 
 
 /**
@@ -29,9 +28,10 @@ public class Controls implements Disposable{
 
     private Image upImg, leftImg, rightImg, exitImg;
     boolean upPressed, leftPressed, rightPressed, exitPressed;
+    private Table tabler, tablel;
 
     public Controls (final GetTheTriforce game){
-        this.game =game;
+        this.game = game;
         cam = new OrthographicCamera();
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, cam);
         stage = new Stage(viewport, game.batch);
@@ -82,8 +82,6 @@ public class Controls implements Disposable{
 
         //set the input processor to the stage
         Gdx.input.setInputProcessor(stage);
-
-
 
         //setup images + listener
         upImg = new Image(new Texture("controls/up.png"));
@@ -136,7 +134,7 @@ public class Controls implements Disposable{
         });
 
         //define a table used to organize control elements
-        Table tablel = new Table();
+        tablel = new Table();
         tablel.left().bottom();
         tablel.setSize(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT);
         tablel.add(leftImg).size(upImg.getWidth(), upImg.getHeight()).bottom();
@@ -181,7 +179,8 @@ public class Controls implements Disposable{
             }
         });
 
-        Table tabler = new Table();
+        // define Table for the In - Game - Exit
+        tabler = new Table();
         tabler.right().top();
         tabler.setSize(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT);
         tabler.add(exitImg).size(exitImg.getWidth(), exitImg.getHeight()).bottom();

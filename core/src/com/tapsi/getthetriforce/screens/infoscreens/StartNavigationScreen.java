@@ -1,7 +1,8 @@
-package com.tapsi.getthetriforce.screens.navigationscreens;
+package com.tapsi.getthetriforce.screens.infoscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,8 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.exitScreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
+import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -24,7 +27,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Creates a screen to select a level
  */
-public class LevelSelectionScreen implements Screen {
+public class StartNavigationScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
@@ -34,10 +37,12 @@ public class LevelSelectionScreen implements Screen {
     private Table table;
 
     private Label.LabelStyle fontHeading;
-    private Label selectionLabel, lineLabel;
-    private TextButton level1TB, level2TB, level3TB, gobackTB;
+    private Label selectionLabel;
+    private TextButton startTB, levelSelectTB, exitTB, scoreTB, controlTB;
 
-    public LevelSelectionScreen(final GetTheTriforce game){
+    private Music music;
+
+    public StartNavigationScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
@@ -55,20 +60,17 @@ public class LevelSelectionScreen implements Screen {
         buttonStyle.fontColor = WHITE;
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("Choose from these levels",fontHeading);
+        selectionLabel = new Label("WELCOME TO GET THE TRIFORCE",fontHeading);
 
-        level1TB = new TextButton("- Level 1",buttonStyle);
-        level2TB = new TextButton("- Level 2",buttonStyle);
-        level3TB = new TextButton("- Level 3",buttonStyle);
+        startTB = new TextButton("# Start a new Game",buttonStyle);
+        levelSelectTB = new TextButton("# Select a level to play",buttonStyle);
+        scoreTB =new TextButton("# See the Pointsystem", buttonStyle);
+        controlTB =new TextButton("# How to play the Game", buttonStyle);
 
-        lineLabel = new Label("--------------------",fontHeading);
-
-
-        gobackTB = new TextButton("- Go back to Start",buttonStyle);
-
+        exitTB = new TextButton("# Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
-        level1TB.addListener(new InputListener(){
+        startTB.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
@@ -81,46 +83,57 @@ public class LevelSelectionScreen implements Screen {
             }
         });
 
-        level2TB.addListener(new InputListener(){
+        levelSelectTB.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //set Game to Level 1-2
-                game.setScreen(new PlayScreen(game, "level/level2.tmx"));
+                game.setScreen(new LevelSelectionScreen(game));
                 dispose();
 
             }
         });
 
-        level3TB.addListener(new InputListener(){
+        scoreTB.addListener(new InputListener() {
+            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //set Game to Level 1-3
-                game.setScreen(new PlayScreen(game, "level/level3.tmx"));
+                game.setScreen(new com.tapsi.getthetriforce.screens.infoscreens.ScoreListScreen(game));
                 dispose();
             }
         });
 
-        gobackTB.addListener(new InputListener(){
+        controlTB.addListener(new InputListener() {
+            @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //go back to the StartNavigationScreen
-                game.setScreen(new StartNavigationScreen(game));
+                game.setScreen(new com.tapsi.getthetriforce.screens.infoscreens.HelpControlScreen(game));
                 dispose();
             }
         });
 
+        exitTB.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new ReallyWantToLeaveScreen(game));
+                dispose();
+            }
+        });
 
 
         //creating and filling table
@@ -128,20 +141,24 @@ public class LevelSelectionScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expandX().padTop(30f);
+        table.add(selectionLabel);
         table.row();
-        table.add(level1TB);
+        table.add(startTB);
         table.row();
-        table.add(level2TB);
+        table.add(levelSelectTB);
         table.row();
-        table.add(level3TB);
+        table.add(scoreTB);
         table.row();
-        table.add(lineLabel);
+        table.add(controlTB);
         table.row();
-        table.add(gobackTB).padTop(10f);
-
+        table.add(exitTB).padTop(10f);
 
         stage.addActor(table);
+
+        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
 
     }
 

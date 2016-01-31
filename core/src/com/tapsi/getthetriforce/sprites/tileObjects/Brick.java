@@ -2,9 +2,9 @@ package com.tapsi.getthetriforce.sprites.tileObjects;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.MapObject;
-import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.playscreen.PlayScreen;
+import com.tapsi.getthetriforce.screens.others.PlayScreen;
 import com.tapsi.getthetriforce.sprites.link.Link;
 
 /**

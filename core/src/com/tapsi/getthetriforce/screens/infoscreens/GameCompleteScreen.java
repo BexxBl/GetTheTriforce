@@ -1,11 +1,13 @@
-package com.tapsi.getthetriforce.screens.navigationscreens;
+package com.tapsi.getthetriforce.screens.infoscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -15,25 +17,32 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.tapsi.getthetriforce.GetTheTriforce;
+import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Creates a navigationscreen that shows up when the timer is 0
+ * Creates the Screen that will pop up when the player completed all 3 levels
+ * contatins a particle system
+ * is not used because currently game logic does not remember which levels are played.
+ * will be used in a future version of the game
  */
-public class TimeUpScreen implements Screen {
-
+public class GameCompleteScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
 
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private Label gameOverLabel, sorryLabel;
+    private Label headingLabel, messageLabel, congratsLabel,descionLabel;
+    private Table table;
+    private Music music;
 
-    public TimeUpScreen(final GetTheTriforce game){
+    private ParticleEffect particleEffect;
+
+    public GameCompleteScreen(final GetTheTriforce game){
         this.game = game;
         sb= game.batch;
 
@@ -44,8 +53,14 @@ public class TimeUpScreen implements Screen {
         //setting up the backgroundImage
         texture = new Texture("textures/back.jpg");
 
+        //setting up the ParticleEffect
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("particle/v2white.party"), Gdx.files.internal(""));
+        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
+        particleEffect.start();
+
         //setting up the style of the label and textbutton
-        Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
+        Label.LabelStyle fontEnd = new Label.LabelStyle(new BitmapFont(), RED);
         Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
@@ -53,12 +68,14 @@ public class TimeUpScreen implements Screen {
         buttonStyle.fontColor = WHITE;
 
         //creating the textlabels & buttons incl. listener
-        gameOverLabel = new Label("TIME IS UP", fontGameOver);
-        sorryLabel = new Label("You have reached the time limit for this level. Please: ", fontGameOver);
+        headingLabel = new Label("The End", fontEnd);
+        messageLabel = new Label("You have completed all 3 Levels!", fontEnd);
+        congratsLabel = new Label("Congratulations!", fontEnd);
+        descionLabel = new Label("Do you want to: ",font);
 
 
-        TextButton changeLevelTB= new TextButton("- Change the Level", buttonStyle);
-        changeLevelTB.addListener(new InputListener(){
+        TextButton playAgainTB = new TextButton("# Start a new Game", buttonStyle);
+        playAgainTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -66,12 +83,13 @@ public class TimeUpScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                game.setScreen(new PlayScreen(game, "level/level1.tmx"));
+                dispose();
             }
         });
 
 
-        TextButton exitTB = new TextButton("- Exit the Game", buttonStyle);
+        TextButton exitTB = new TextButton("# Exit the Game", buttonStyle);
         exitTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -80,28 +98,34 @@ public class TimeUpScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new ReallyWantToLeaveScreen(game));
-                dispose();
+                System.exit(0);
             }
         });
 
-
-
         //creating & filling the table
-        Table table = new Table();
+        table = new Table();
         table.center();
         table.setFillParent(true);
 
-        table.add(gameOverLabel).expandX();
+        table.add(headingLabel).expandX();
         table.row();
-        table.add(sorryLabel).expandX().padTop(10f);
+        table.add(messageLabel).expandX().padTop(10f);
         table.row();
-        table.add(changeLevelTB).expandX().padTop(10f);
+        table.add(congratsLabel).expandX().padTop(10f);
+        table.row();
+        table.add(descionLabel).expandX().padTop(10f);
+        table.row();
+        table.add(playAgainTB).expandX().padTop(10f);
         table.row();
         table.add(exitTB).expandX().padTop(20f);
 
         //adding table to stage
         stage.addActor(table);
+
+        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
     }
 
     @Override
@@ -113,10 +137,18 @@ public class TimeUpScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        particleEffect.update(Gdx.graphics.getDeltaTime());
+
         sb.begin();
         sb.draw(texture, 0, 0);
+        particleEffect.draw(sb);
         sb.end();
         stage.draw();
+
+        //draw particleeffect all the time
+        if (particleEffect.isComplete()){
+            particleEffect.reset();
+        }
     }
 
     @Override
@@ -143,5 +175,6 @@ public class TimeUpScreen implements Screen {
     public void dispose() {
         stage.dispose();
         texture.dispose();
+        particleEffect.dispose();
     }
 }
