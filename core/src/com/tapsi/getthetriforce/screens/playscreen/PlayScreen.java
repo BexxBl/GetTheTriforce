@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
+import com.tapsi.getthetriforce.screens.navigationscreens.ExitInGameScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.GameOverScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.navigationscreens.TimeUpScreen;
@@ -155,7 +156,7 @@ public class PlayScreen implements Screen{
             if (controls.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
             if (controls.isExitPressed())
-                game.setScreen(new ReallyWantToLeaveScreen(game));
+                game.setScreen(new ExitInGameScreen(game));
 
         }
     }

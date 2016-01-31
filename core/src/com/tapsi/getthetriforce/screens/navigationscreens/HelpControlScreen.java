@@ -23,7 +23,7 @@ import com.tapsi.getthetriforce.GetTheTriforce;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Screen the loads at the start of opening the app
+ * how to navigate in the game
  */
 public class HelpControlScreen implements Screen {
 
@@ -32,18 +32,16 @@ public class HelpControlScreen implements Screen {
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private Music music;
 
     private Label headingLabel, upLabel, leftLabel, rightLabel, xLabel;
     private Image upImg, leftImg, rightImg, xImg;
-    private TextButton backTB;
     private Table table;
 
     public HelpControlScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
-        texture= new Texture("textures/triforce.png");
+        texture= new Texture("textures/back.jpg");
 
 
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
@@ -64,67 +62,51 @@ public class HelpControlScreen implements Screen {
         xLabel = new Label("Exit the Game while playing", font2);
 
         upImg = new Image(new Texture("controls/up.png"));
-        upImg.setSize(20,20);
+        upImg.setSize(16,16);
 
         leftImg = new Image(new Texture("controls/left.png"));
-        leftImg.setSize(20,20);
+        leftImg.setSize(16,16);
 
         rightImg = new Image(new Texture("controls/right.png"));
-        rightImg.setSize(20,20);
+        rightImg.setSize(16, 16);
 
         xImg = new Image(new Texture("controls/x.png"));
-        xImg.setSize(20,20);
-
-
-        backTB.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new InfoScreen(game));
-                dispose();
-            }
-        });
+        xImg.setSize(16, 16);
 
 
         table = new Table();
         table.center();
         table.setFillParent(true);
 
-        table.add(headingLabel).expandX();
+        table.add(headingLabel);
         table.row();
-        table.add(leftImg).expandX();
-        table.add(leftLabel).expandX();
+        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
+        table.add(leftLabel);
         table.row();
-        table.add(rightImg).expandX();
-        table.add(rightLabel).expandX();
+        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
+        table.add(rightLabel);
         table.row();
-        table.add(upImg).expandX();
-        table.add(upLabel).expandX();
+        table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
+        table.add(upLabel);
         table.row();
-        table.add(xImg).expandX();
-        table.add(xLabel).expandX();
-        table.row();
-        table.add(backTB).padTop(30f);
-
+        table.add(xImg).size(xImg.getWidth(), xImg.getHeight());
+        table.add(xLabel);
 
         stage.addActor(table);
-
-        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
     }
 
     @Override
-    public void show() { Gdx.input.setInputProcessor(stage);
+    public void show() {
 
     }
 
     @Override
     public void render(float delta) {
+
+        if(Gdx.input.justTouched()) {
+            game.setScreen(new StartNavigationScreen(game));
+            dispose();
+        }
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

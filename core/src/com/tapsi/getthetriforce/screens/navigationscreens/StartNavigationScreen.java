@@ -35,7 +35,7 @@ public class StartNavigationScreen implements Screen {
 
     private Label.LabelStyle fontHeading;
     private Label selectionLabel;
-    private TextButton startTB, levelSelectTB, exitTB, infoTB;
+    private TextButton startTB, levelSelectTB, exitTB, scoreTB, controlTB;
 
     public StartNavigationScreen(final GetTheTriforce game){
         this.game = game;
@@ -45,7 +45,7 @@ public class StartNavigationScreen implements Screen {
         stage = new Stage(viewport, game.batch);
 
         //setting up the backgroundImage
-        texture = new Texture("textures/triforce.png");
+        texture = new Texture("textures/back.jpg");
 
         //setting up the style of the label and textbutton
         fontHeading = new Label.LabelStyle(new BitmapFont(), RED);
@@ -59,7 +59,9 @@ public class StartNavigationScreen implements Screen {
 
         startTB = new TextButton("- Start a new Game",buttonStyle);
         levelSelectTB = new TextButton("- Select a level",buttonStyle);
-        infoTB =new TextButton("- Game - Informations", buttonStyle);
+        scoreTB =new TextButton("- Pointsystem", buttonStyle);
+        controlTB =new TextButton("- How to play", buttonStyle);
+
         exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
@@ -89,7 +91,7 @@ public class StartNavigationScreen implements Screen {
             }
         });
 
-        infoTB.addListener(new InputListener() {
+        scoreTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -97,7 +99,20 @@ public class StartNavigationScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new InfoScreen(game));
+                game.setScreen(new ScoreListScreen(game));
+                dispose();
+            }
+        });
+
+        controlTB.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new HelpControlScreen(game));
                 dispose();
             }
         });
@@ -121,15 +136,17 @@ public class StartNavigationScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expandX().padTop(30f);
+        table.add(selectionLabel);
         table.row();
-        table.add(startTB).padTop(10f);
+        table.add(startTB);
         table.row();
-        table.add(levelSelectTB).padTop(10f);
+        table.add(levelSelectTB);
         table.row();
-        table.add(infoTB).expand().padTop(10f);
+        table.add(scoreTB);
         table.row();
-        table.add(exitTB).expand().padTop(10f);
+        table.add(controlTB);
+        table.row();
+        table.add(exitTB).padTop(10f);
 
         stage.addActor(table);
 

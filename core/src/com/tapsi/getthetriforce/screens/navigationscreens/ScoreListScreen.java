@@ -35,7 +35,6 @@ public class ScoreListScreen implements Screen {
 
     private Label welcomeLabel, BricksLabel, kidLabel, chickenLabel, blockLabel, lineLabel;
     private Table table;
-    private TextButton backTB;
 
 
     public ScoreListScreen(final GetTheTriforce game){
@@ -67,55 +66,35 @@ public class ScoreListScreen implements Screen {
         chickenLabel = new Label("Killing the Chickens - 300 Points",font2);
         kidLabel = new Label("Killing the Horrorkids - 350 Points",font2);
 
-        backTB.addListener(new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //go back to the StartNavigationScreen
-                game.setScreen(new InfoScreen(game));
-                dispose();
-            }
-        });
-
-
-
 
         table.add(welcomeLabel).expandX();
         table.row();
-        table.add(BricksLabel).padTop(20f);
+        table.add(BricksLabel).padTop(10f);
         table.row();
-        table.add(blockLabel).padTop(20f);
-        table.row();
-        table.add(lineLabel);
-        table.row();
-        table.add(chickenLabel).padTop(20f);
-        table.row();
-        table.add(kidLabel).padTop(20f);
+        table.add(blockLabel).padTop(10f);
         table.row();
         table.add(lineLabel);
         table.row();
-        table.add(backTB).padTop(20f);
-
+        table.add(chickenLabel).padTop(10f);
+        table.row();
+        table.add(kidLabel).padTop(10f);
 
         stage.addActor(table);
-
-        music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
-        music.setLooping(true);
-        music.setVolume(0.3f);
-        music.play();
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
 
     }
 
     @Override
     public void render(float delta) {
+
+        if(Gdx.input.justTouched()) {
+            game.setScreen(new StartNavigationScreen(game));
+            dispose();
+        }
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
