@@ -59,7 +59,7 @@ public class StartNavigationScreen implements Screen {
 
         startTB = new TextButton("- Start a new Game",buttonStyle);
         levelSelectTB = new TextButton("- Select a level",buttonStyle);
-        infoTB =new TextButton("- Gameinformations", buttonStyle);
+        infoTB =new TextButton("- Game - Informations", buttonStyle);
         exitTB = new TextButton("- Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
@@ -83,7 +83,6 @@ public class StartNavigationScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //set Game to Level 1-2
                 game.setScreen(new LevelSelectionScreen(game));
                 dispose();
 

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -24,7 +25,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Screen the loads at the start of opening the app
  */
-public class InfoScreen implements Screen {
+public class HelpControlScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
@@ -33,11 +34,12 @@ public class InfoScreen implements Screen {
     private Texture texture;
     private Music music;
 
-    private Label headingLabel;
-    private TextButton scoreTB, backTB, controllTB ;
+    private Label headingLabel, upLabel, leftLabel, rightLabel, xLabel;
+    private Image upImg, leftImg, rightImg, xImg;
+    private TextButton backTB;
     private Table table;
 
-    public InfoScreen(final GetTheTriforce game){
+    public HelpControlScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
@@ -49,65 +51,61 @@ public class InfoScreen implements Screen {
 
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
+        Label.LabelStyle font2 = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+
+        headingLabel = new Label("How to control the Game: ", font);
+        leftLabel = new Label("Run Left", font2);
+        rightLabel = new Label("Run right", font2);
+        upLabel = new Label("Jump", font2);
+        xLabel = new Label("Exit the Game while playing", font2);
+
+        upImg = new Image(new Texture("controls/up.png"));
+        upImg.setSize(20,20);
+
+        leftImg = new Image(new Texture("controls/left.png"));
+        leftImg.setSize(20,20);
+
+        rightImg = new Image(new Texture("controls/right.png"));
+        rightImg.setSize(20,20);
+
+        xImg = new Image(new Texture("controls/x.png"));
+        xImg.setSize(20,20);
+
+
+        backTB.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new InfoScreen(game));
+                dispose();
+            }
+        });
+
 
         table = new Table();
         table.center();
         table.setFillParent(true);
 
-        headingLabel = new Label("What Informations do you need?  ", font);
-
-        scoreTB = new TextButton("- What the Scores are",buttonStyle);
-        controllTB = new TextButton("- How to control the Game", buttonStyle);
-
-        scoreTB.addListener(new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                //go back to the StartNavigationScreen
-                game.setScreen(new ScoreListScreen(game));
-                dispose();
-            }
-        });
-
-        controllTB.addListener(new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new HelpControlScreen(game));
-                dispose();
-            }
-        });
-
-
-
-        backTB.addListener(new InputListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new StartNavigationScreen(game));
-                dispose();
-            }
-        });
-
-
-
         table.add(headingLabel).expandX();
         table.row();
-        table.add(scoreTB).padTop(20f);
+        table.add(leftImg).expandX();
+        table.add(leftLabel).expandX();
         table.row();
-        table.add(controllTB).padTop(20f);
+        table.add(rightImg).expandX();
+        table.add(rightLabel).expandX();
+        table.row();
+        table.add(upImg).expandX();
+        table.add(upLabel).expandX();
+        table.row();
+        table.add(xImg).expandX();
+        table.add(xLabel).expandX();
         table.row();
         table.add(backTB).padTop(30f);
 

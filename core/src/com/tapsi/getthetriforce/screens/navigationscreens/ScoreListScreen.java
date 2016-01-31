@@ -75,7 +75,7 @@ public class ScoreListScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //go back to the StartNavigationScreen
-                game.setScreen(new StartNavigationScreen(game));
+                game.setScreen(new InfoScreen(game));
                 dispose();
             }
         });
