@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Controls;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.exitScreens.ExitInGameScreen;
+import com.tapsi.getthetriforce.screens.exitscreens.ExitInGameScreen;
 import com.tapsi.getthetriforce.screens.gameoverscreens.GameOverScreen;
 import com.tapsi.getthetriforce.screens.gameoverscreens.TimeUpScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;

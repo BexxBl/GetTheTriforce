@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens.gameoverscreens;
+package com.tapsi.getthetriforce.screens.exitscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -17,29 +17,28 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
+import com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * The Screen that displays when player/link dies
+ * Screen that pops up when you want to exit the game completlly
  */
-
-    public class GameOverScreen implements Screen {
+public class ReallyWantToLeaveScreen implements Screen {
         private Viewport viewport;
         private Stage stage;
 
         private GetTheTriforce game;
         private SpriteBatch sb;
         private Texture texture;
-        private Label gameOverLabel, sorryLabel;
+        private Label exitLabel;
+        private TextButton yesTB, noTB;
         private Table table;
-        private TextButton exitTB,changeLevelTB;
         private Music music;
 
-        public GameOverScreen(final GetTheTriforce game){
+        public ReallyWantToLeaveScreen(final GetTheTriforce game){
             this.game = game;
             sb= game.batch;
 
@@ -52,19 +51,17 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
             //setting up the style of the label and textbutton
             Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
-            Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
 
             TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
             buttonStyle.font = new BitmapFont();
             buttonStyle.fontColor = WHITE;
 
             //creating the textlabels & buttons incl. listener
-            gameOverLabel = new Label("GAME OVER", fontGameOver);
-            sorryLabel = new Label("You have been killed unfortunately. Do you want to: ", fontGameOver);
+            exitLabel = new Label("Do you really want to exit the Game?", fontGameOver);
 
 
-            exitTB = new TextButton("# Go back to the Menu", buttonStyle);
-            exitTB.addListener(new InputListener() {
+            yesTB= new TextButton("# YES", buttonStyle);
+            yesTB.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     return true;
@@ -72,36 +69,37 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new ReallyWantToLeaveScreen(game));
+                    System.exit(0);
+                }
+            });
+
+
+            noTB = new TextButton("# NO", buttonStyle);
+            noTB.addListener(new InputListener() {
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    return true;
+                }
+
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    game.setScreen(new StartNavigationScreen(game));
                     dispose();
                 }
             });
 
-            changeLevelTB= new TextButton("# Change the Level", buttonStyle);
-            changeLevelTB.addListener(new InputListener(){
-                @Override
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return true;
-                }
 
-                @Override
-                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new LevelSelectionScreen(game));
-                }
-            });
 
             //creating & filling the table
             table = new Table();
             table.center();
             table.setFillParent(true);
 
-            table.add(gameOverLabel).expandX();
+            table.add(exitLabel).expandX();
             table.row();
-            table.add(sorryLabel).expandX().padTop(10f);
+            table.add(yesTB).expandX().padTop(10f);
             table.row();
-            table.add(changeLevelTB).expandX().padTop(10f);
-            table.row();
-            table.add(exitTB).expandX().padTop(20f);
+            table.add(noTB).expandX().padTop(20f);
 
             //adding table to stage
             stage.addActor(table);
@@ -151,7 +149,6 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         public void dispose() {
             stage.dispose();
             texture.dispose();
-
         }
-    }
 
+}

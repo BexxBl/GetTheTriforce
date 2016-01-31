@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens.infoscreens;
+package com.tapsi.getthetriforce.screens.exitscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -26,7 +26,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Screen that pops up when you want to exit the game completlly
  */
-public class ReallyWantToLeaveScreen implements Screen {
+public class ExitInGameScreen implements Screen {
         private Viewport viewport;
         private Stage stage;
 
@@ -38,7 +38,7 @@ public class ReallyWantToLeaveScreen implements Screen {
         private Table table;
         private Music music;
 
-        public ReallyWantToLeaveScreen(final GetTheTriforce game){
+        public ExitInGameScreen(final GetTheTriforce game){
             this.game = game;
             sb= game.batch;
 
@@ -57,7 +57,7 @@ public class ReallyWantToLeaveScreen implements Screen {
             buttonStyle.fontColor = WHITE;
 
             //creating the textlabels & buttons incl. listener
-            exitLabel = new Label("Do you really want to exit the Game?", fontGameOver);
+            exitLabel = new Label("Do you really want to exit the Level?", fontGameOver);
 
 
             yesTB= new TextButton("# YES", buttonStyle);
@@ -70,6 +70,7 @@ public class ReallyWantToLeaveScreen implements Screen {
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                     game.setScreen(new LevelSelectionScreen(game));
+                    dispose();
                 }
             });
 
