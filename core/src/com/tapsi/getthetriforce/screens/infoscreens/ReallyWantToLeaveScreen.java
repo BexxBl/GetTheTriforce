@@ -24,7 +24,7 @@ import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Created by Rebecca on 31.01.16.
+ * Screen that pops up when you want to exit the game completlly
  */
 public class ReallyWantToLeaveScreen implements Screen {
         private Viewport viewport;
