@@ -1,4 +1,4 @@
-package com.tapsi.getthetriforce.screens.gameoverscreens;
+package com.tapsi.getthetriforce.screens.infoscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
