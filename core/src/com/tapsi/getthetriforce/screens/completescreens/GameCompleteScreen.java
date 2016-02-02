@@ -1,13 +1,13 @@
-package com.tapsi.getthetriforce.screens.infoscreens;
+package com.tapsi.getthetriforce.screens.completescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -18,50 +18,64 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
-import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
+import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
+import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
- * Creates the screen between the levels
+ * Creates the Screen that will pop up when the player completed all 3 levels
+ * contatins a particle system
+ * is not used because currently game logic does not remember which levels are played.
+ * will be used in a future version of the game
  */
-public class LevelCompleteScreen implements Screen{
+public class GameCompleteScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
+
     private GetTheTriforce game;
     private SpriteBatch sb;
     private Texture texture;
-    private TextButton selectLevelTB, exitGameTB;
-    private Label completeLabel, descionLabel;
+    private Label headingLabel, messageLabel, congratsLabel,descionLabel;
     private Table table;
     private Music music;
 
-    public LevelCompleteScreen(final GetTheTriforce game) {
+    private ParticleEffect particleEffect;
 
-
+    public GameCompleteScreen(final GetTheTriforce game){
         this.game = game;
-        sb = game.batch;
+        sb= game.batch;
 
-        texture= new Texture("textures/back.jpg");
-
-
+        //initialize viewport and stage
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
+        //setting up the backgroundImage
+        texture = new Texture("textures/back.jpg");
+
+        //setting up the ParticleEffect
+        particleEffect = new ParticleEffect();
+        particleEffect.load(Gdx.files.internal("particle/v2white.party"), Gdx.files.internal(""));
+        particleEffect.getEmitters().first().setPosition(GetTheTriforce.V_WIDTH / 2, GetTheTriforce.V_HEIGHT/2);
+        particleEffect.start();
+
+        //setting up the style of the label and textbutton
+        Label.LabelStyle fontEnd = new Label.LabelStyle(new BitmapFont(), RED);
+        Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
+
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
 
-        completeLabel = new Label("You completed the Level", font);
-        descionLabel = new Label("Do you want to", font);
-        selectLevelTB = new TextButton("# Select a new Level", buttonStyle);
-        exitGameTB = new TextButton("# Go back to the Menu", buttonStyle);
+        //creating the textlabels & buttons incl. listener
+        headingLabel = new Label("The End", fontEnd);
+        messageLabel = new Label("You have completed all 3 Levels!", fontEnd);
+        congratsLabel = new Label("Congratulations!", fontEnd);
+        descionLabel = new Label("Do you want to: ",font);
 
 
-
-        selectLevelTB.addListener(new InputListener() {
+        TextButton playAgainTB = new TextButton("# Start a new Game", buttonStyle);
+        playAgainTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -69,12 +83,14 @@ public class LevelCompleteScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                game.setScreen(new PlayScreen(game, "level/level1.tmx"));
                 dispose();
             }
         });
 
-        exitGameTB.addListener(new InputListener() {
+
+        TextButton exitTB = new TextButton("# Exit the Game", buttonStyle);
+        exitTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -82,24 +98,28 @@ public class LevelCompleteScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new ReallyWantToLeaveScreen(game));
-                dispose();
+                System.exit(0);
             }
         });
 
-
+        //creating & filling the table
         table = new Table();
         table.center();
         table.setFillParent(true);
 
-        table.add(completeLabel).expandX();
+        table.add(headingLabel).expandX();
         table.row();
-        table.add(descionLabel);
+        table.add(messageLabel).expandX().padTop(10f);
         table.row();
-        table.add(selectLevelTB).expandX().padTop(10f);
+        table.add(congratsLabel).expandX().padTop(10f);
         table.row();
-        table.add(exitGameTB).expandX().padTop(10f);
+        table.add(descionLabel).expandX().padTop(10f);
+        table.row();
+        table.add(playAgainTB).expandX().padTop(10f);
+        table.row();
+        table.add(exitTB).expandX().padTop(20f);
 
+        //adding table to stage
         stage.addActor(table);
 
         music = GetTheTriforce.manager.get("audio/music/zelda.ogg", Music.class);
@@ -108,22 +128,27 @@ public class LevelCompleteScreen implements Screen{
         music.play();
     }
 
-
     @Override
-    public void show() { Gdx.input.setInputProcessor(stage);
-
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        particleEffect.update(Gdx.graphics.getDeltaTime());
+
         sb.begin();
         sb.draw(texture, 0, 0);
+        particleEffect.draw(sb);
         sb.end();
         stage.draw();
 
-
+        //draw particleeffect all the time
+        if (particleEffect.isComplete()){
+            particleEffect.reset();
+        }
     }
 
     @Override
@@ -150,5 +175,6 @@ public class LevelCompleteScreen implements Screen{
     public void dispose() {
         stage.dispose();
         texture.dispose();
+        particleEffect.dispose();
     }
 }

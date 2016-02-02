@@ -22,7 +22,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * What Points do i get when breaking bricks, jumping at enemies or jumping at ?-blocks
  */
-public class ScoreListScreen implements Screen {
+public class PointListScreen implements Screen {
 
     private Viewport viewport;
     private Stage stage;
@@ -35,7 +35,7 @@ public class ScoreListScreen implements Screen {
     private Table table;
 
 
-    public ScoreListScreen(final GetTheTriforce game){
+    public PointListScreen(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 

@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.exitScreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 import com.tapsi.getthetriforce.screens.others.PlayScreen;
@@ -105,7 +104,7 @@ public class StartNavigationScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new com.tapsi.getthetriforce.screens.infoscreens.ScoreListScreen(game));
+                game.setScreen(new PointListScreen(game));
                 dispose();
             }
         });

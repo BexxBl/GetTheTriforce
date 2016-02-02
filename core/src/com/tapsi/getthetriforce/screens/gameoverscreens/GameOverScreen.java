@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
@@ -34,7 +35,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         private GetTheTriforce game;
         private SpriteBatch sb;
         private Texture texture;
-        private Label gameOverLabel, sorryLabel;
+        private Label gameOverLabel, sorryLabel, pointsLabel;
         private Table table;
         private TextButton exitTB,changeLevelTB;
         private Music music;
@@ -90,6 +91,9 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
+            pointsLabel = new Label("You have reached " + Hud.getScore()+ " Points in this Level!", font);
+
+
             //creating & filling the table
             table = new Table();
             table.center();
@@ -100,6 +104,8 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             table.add(sorryLabel).expandX().padTop(10f);
             table.row();
             table.add(changeLevelTB).expandX().padTop(10f);
+            table.row();
+            table.add(pointsLabel).expandX();
             table.row();
             table.add(exitTB).expandX().padTop(20f);
 

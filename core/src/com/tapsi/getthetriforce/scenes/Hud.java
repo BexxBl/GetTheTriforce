@@ -31,6 +31,9 @@ public class Hud implements Disposable{
     private Label countdownLabel, timeLabel, linkLabel;
     private static Label scoreLabel;
 
+
+
+
     public Hud (SpriteBatch sb){
         //define tracking variables
         worldTimer = 250;
@@ -89,4 +92,11 @@ public class Hud implements Disposable{
     public boolean isTimeUp() { return timeUp; }
 
 
+    public static Label getScoreLabel() {
+        return scoreLabel;
+    }
+
+    public static Integer getScore() {
+        return score;
+    }
 }

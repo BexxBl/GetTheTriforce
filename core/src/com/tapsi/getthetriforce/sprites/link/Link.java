@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
-import com.tapsi.getthetriforce.screens.infoscreens.LevelCompleteScreen;
+import com.tapsi.getthetriforce.screens.completescreens.LevelCompleteScreen;
 import com.tapsi.getthetriforce.screens.others.PlayScreen;
 import com.tapsi.getthetriforce.sprites.enemies.Enemy;
 
