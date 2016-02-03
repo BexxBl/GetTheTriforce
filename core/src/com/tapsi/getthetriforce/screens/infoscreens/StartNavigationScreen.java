@@ -76,7 +76,7 @@ public class StartNavigationScreen implements Screen {
         selectionLabel = new Label("WELCOME TO GET THE TRIFORCE",fontHeading);
 
         startTB = new TextButton("Start a new Game",buttonStyle);
-        levelSelectTB = new TextButton("Select a level to play",buttonStyle);
+        levelSelectTB = new TextButton("Select a Level to play",buttonStyle);
         scoreTB =new TextButton("See the Pointsystem", buttonStyle);
         controlTB =new TextButton("How to play the Game", buttonStyle);
 
