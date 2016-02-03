@@ -28,7 +28,7 @@ public class HelpControlScreen implements Screen {
     private SpriteBatch sb;
     private Texture texture;
 
-    private Label headingLabel, upLabel, leftLabel, rightLabel, xLabel;
+    private Label upLabel, leftLabel, rightLabel, xLabel, headingLabel;
     private Image upImg, leftImg, rightImg, xImg;
     private Table table;
 
@@ -44,15 +44,14 @@ public class HelpControlScreen implements Screen {
         stage = new Stage(viewport, game.batch);
 
         //creating the styles of the Labels and TextButtons
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
-        Label.LabelStyle font2 = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
         //initaizing the Labels and Images
-        headingLabel = new Label("How to control the Game: ", font);
-        leftLabel = new Label("Run Left", font2);
-        rightLabel = new Label("Run right", font2);
-        upLabel = new Label("Jump", font2);
-        xLabel = new Label("Exit the Game, while playing", font2);
+        headingLabel = new Label("How to Play:", font);
+        leftLabel = new Label("Run Left", font);
+        rightLabel = new Label("Run right", font);
+        upLabel = new Label("Jump", font);
+        xLabel = new Label("Exit the Level", font);
 
         upImg = new Image(new Texture("controls/up.png"));
         upImg.setSize(16,16);
@@ -68,23 +67,24 @@ public class HelpControlScreen implements Screen {
 
         //creating and filling the Table
         table = new Table();
-        table.center();
+        table.left().center();
         table.setFillParent(true);
 
+
         table.add(headingLabel);
-        table.add();
-        table.row();
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
+        table.row().padTop(10f);
         table.add(leftLabel);
+        table.add(leftImg).size(20, 20).padLeft(10f);
         table.row();
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
         table.add(rightLabel);
+        table.add(rightImg).size(20, 20).padLeft(10f);
         table.row();
-        table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
         table.add(upLabel);
+        table.add(upImg).size(20, 20).padLeft(10f);
         table.row();
-        table.add(xImg).size(xImg.getWidth(), xImg.getHeight());
         table.add(xLabel);
+        table.add(xImg).size(20, 20).padLeft(10f);
+
 
         //adding the table to the stage
         stage.addActor(table);

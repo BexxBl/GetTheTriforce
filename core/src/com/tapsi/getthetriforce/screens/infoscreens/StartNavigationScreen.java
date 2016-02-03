@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,7 +23,9 @@ import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
+import static com.badlogic.gdx.graphics.Color.BROWN;
 import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.Color.ROYAL;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -39,6 +43,8 @@ public class StartNavigationScreen implements Screen {
     private Label.LabelStyle fontHeading;
     private Label selectionLabel;
     private TextButton startTB, levelSelectTB, exitTB, scoreTB, controlTB;
+    private Skin skin;
+    private TextureAtlas buttonatlas;
 
     private Music music;
 
@@ -53,21 +59,28 @@ public class StartNavigationScreen implements Screen {
         texture = new Texture("textures/back.jpg");
 
         //setting up the style of the label and textbutton
-        fontHeading = new Label.LabelStyle(new BitmapFont(), RED);
+        fontHeading = new Label.LabelStyle(new BitmapFont(), WHITE);
+
+        skin = new Skin();
+        buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+        skin.addRegions(buttonatlas);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = RED;
+        buttonStyle.up = skin.getDrawable("up");
+        buttonStyle.down = skin.getDrawable("down");
 
         //creating the Labels & Buttons
         selectionLabel = new Label("WELCOME TO GET THE TRIFORCE",fontHeading);
 
-        startTB = new TextButton("# Start a new Game",buttonStyle);
-        levelSelectTB = new TextButton("# Select a level to play",buttonStyle);
-        scoreTB =new TextButton("# See the Pointsystem", buttonStyle);
-        controlTB =new TextButton("# How to play the Game", buttonStyle);
+        startTB = new TextButton("Start a new Game",buttonStyle);
+        levelSelectTB = new TextButton("Select a level to play",buttonStyle);
+        scoreTB =new TextButton("See the Pointsystem", buttonStyle);
+        controlTB =new TextButton("How to play the Game", buttonStyle);
 
-        exitTB = new TextButton("# Exit the Game",buttonStyle);
+        exitTB = new TextButton("Exit the Game",buttonStyle);
 
         //creating listener for the textButtons
         startTB.addListener(new InputListener() {
@@ -143,15 +156,15 @@ public class StartNavigationScreen implements Screen {
 
         table.add(selectionLabel);
         table.row();
-        table.add(startTB);
+        table.add(startTB).padTop(6f);
         table.row();
-        table.add(levelSelectTB);
+        table.add(levelSelectTB).padTop(3f);
         table.row();
-        table.add(scoreTB);
+        table.add(scoreTB).padTop(3f);
         table.row();
-        table.add(controlTB);
+        table.add(controlTB).padTop(3f);
         table.row();
-        table.add(exitTB).padTop(10f);
+        table.add(exitTB).padTop(6f);
 
         stage.addActor(table);
 

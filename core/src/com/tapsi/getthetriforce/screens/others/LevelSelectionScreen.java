@@ -8,15 +8,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
+
 
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -33,9 +36,11 @@ public class LevelSelectionScreen implements Screen {
     private Texture texture;
     private Table table;
 
-    private Label.LabelStyle fontHeading;
-    private Label selectionLabel, lineLabel;
+    private Label.LabelStyle font;
+    private Label selectionLabel;
     private TextButton level1TB, level2TB, level3TB, gobackTB;
+    private com.badlogic.gdx.scenes.scene2d.ui.Skin skin;
+    private TextureAtlas buttonatlas;
 
     private Music music;
 
@@ -50,20 +55,26 @@ public class LevelSelectionScreen implements Screen {
         texture = new Texture("textures/back.jpg");
 
         //setting up the style of the label and textbutton
-        fontHeading = new Label.LabelStyle(new BitmapFont(), RED);
+        font = new Label.LabelStyle(new BitmapFont(), WHITE);
+
+        skin = new Skin();
+        buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+        skin.addRegions(buttonatlas);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = RED;
+        buttonStyle.up = skin.getDrawable("up");
+        buttonStyle.down = skin.getDrawable("down");
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("Choose from these levels",fontHeading);
+        selectionLabel = new Label("Please choose from these levels:",font);
 
-        level1TB = new TextButton("# Level 1",buttonStyle);
-        level2TB = new TextButton("# Level 2",buttonStyle);
-        level3TB = new TextButton("# Level 3",buttonStyle);
-        lineLabel = new Label("--------------------",fontHeading);
-        gobackTB = new TextButton("# Go back to the Menu",buttonStyle);
+        level1TB = new TextButton("Level 1",buttonStyle);
+        level2TB = new TextButton("Level 2",buttonStyle);
+        level3TB = new TextButton("Level 3",buttonStyle);
+        gobackTB = new TextButton("Go back to the Menu",buttonStyle);
 
 
         //creating listener for the textButtons
@@ -127,15 +138,13 @@ public class LevelSelectionScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        table.add(selectionLabel).expandX().padTop(30f);
+        table.add(selectionLabel).expandX();
         table.row();
-        table.add(level1TB);
+        table.add(level1TB).padTop(6f);
         table.row();
-        table.add(level2TB);
+        table.add(level2TB).padTop(3f);
         table.row();
-        table.add(level3TB);
-        table.row();
-        table.add(lineLabel);
+        table.add(level3TB).padTop(3f);
         table.row();
         table.add(gobackTB).padTop(10f);
 

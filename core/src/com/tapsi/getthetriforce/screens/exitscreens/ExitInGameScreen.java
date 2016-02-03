@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -20,6 +22,7 @@ import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -37,6 +40,8 @@ public class ExitInGameScreen implements Screen {
         private TextButton yesTB, noTB;
         private Table table;
         private Music music;
+        private Skin skin;
+        private TextureAtlas buttonatlas;
 
         public ExitInGameScreen(final GetTheTriforce game){
             this.game = game;
@@ -50,17 +55,25 @@ public class ExitInGameScreen implements Screen {
             texture = new Texture("textures/back.jpg");
 
             //setting up the style of the label and textbutton
-            Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
+            Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), WHITE);
+
+            skin = new Skin();
+            buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+            skin.addRegions(buttonatlas);
 
             TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
             buttonStyle.font = new BitmapFont();
             buttonStyle.fontColor = WHITE;
+            buttonStyle.downFontColor = RED;
+            buttonStyle.up = skin.getDrawable("up");
+            buttonStyle.down = skin.getDrawable("down");
+
 
             //creating the textlabels & buttons incl. listener
             exitLabel = new Label("Do you really want to exit the Level?", fontGameOver);
 
 
-            yesTB= new TextButton("# YES", buttonStyle);
+            yesTB= new TextButton("YES", buttonStyle);
             yesTB.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -69,13 +82,13 @@ public class ExitInGameScreen implements Screen {
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new LevelSelectionScreen(game));
+                    game.setScreen(new StartNavigationScreen(game));
                     dispose();
                 }
             });
 
 
-            noTB = new TextButton("# NO", buttonStyle);
+            noTB = new TextButton("NO", buttonStyle);
             noTB.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

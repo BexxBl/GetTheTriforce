@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,6 +23,7 @@ import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -39,6 +42,8 @@ public class TimeUpScreen implements Screen {
     private TextButton changeLevelTB,exitTB;
     private Table table;
     private Music music;
+    private Skin skin;
+    private TextureAtlas buttonatlas;
 
     public TimeUpScreen(final GetTheTriforce game){
         this.game = game;
@@ -52,21 +57,28 @@ public class TimeUpScreen implements Screen {
         texture = new Texture("textures/back.jpg");
 
         //setting up the style of the label and textbutton
-        Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
         Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
+
+        skin = new Skin();
+        buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+        skin.addRegions(buttonatlas);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = RED;
+        buttonStyle.up = skin.getDrawable("up");
+        buttonStyle.down = skin.getDrawable("down");
+
 
         //creating the textlabels & buttons incl. listener
-        gameOverLabel = new Label("TIME IS UP", fontGameOver);
-        sorryLabel = new Label("You have reached the time limit for this level. Please: ", fontGameOver);
+        gameOverLabel = new Label("TIME IS UP", font);
+        sorryLabel = new Label("Please: ", font);
 
-        pointsLabel = new Label("You have gained " + Hud.getScore()+ " Points in this Level!", font);
+        pointsLabel = new Label("You have gained " + Hud.getScore()+ " Points but reached the time limit.", font);
 
 
-        changeLevelTB= new TextButton("# Change the Level", buttonStyle);
+        changeLevelTB= new TextButton("Change the Level", buttonStyle);
         changeLevelTB.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -80,7 +92,7 @@ public class TimeUpScreen implements Screen {
         });
 
 
-        exitTB = new TextButton("# Go back to the Menu", buttonStyle);
+        exitTB = new TextButton("Go back to the Menu", buttonStyle);
         exitTB.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -107,9 +119,9 @@ public class TimeUpScreen implements Screen {
         table.row();
         table.add(sorryLabel).expandX().padTop(10f);
         table.row();
-        table.add(changeLevelTB).expandX().padTop(10f);
+        table.add(changeLevelTB).expandX().padTop(5f);
         table.row();
-        table.add(exitTB).expandX().padTop(20f);
+        table.add(exitTB).expandX().padTop(5f);
 
         //adding table to stage
         stage.addActor(table);

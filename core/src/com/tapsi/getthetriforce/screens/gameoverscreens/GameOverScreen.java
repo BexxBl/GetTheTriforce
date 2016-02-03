@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,6 +23,7 @@ import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -39,6 +42,8 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
         private Table table;
         private TextButton exitTB,changeLevelTB;
         private Music music;
+    private Skin skin;
+    private TextureAtlas buttonatlas;
 
         public GameOverScreen(final GetTheTriforce game){
             this.game = game;
@@ -52,19 +57,26 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             texture = new Texture("textures/back.jpg");
 
             //setting up the style of the label and textbutton
-            Label.LabelStyle fontGameOver = new Label.LabelStyle(new BitmapFont(), RED);
             Label.LabelStyle font= new Label.LabelStyle(new BitmapFont(), WHITE);
+
+            skin = new Skin();
+            buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+            skin.addRegions(buttonatlas);
 
             TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
             buttonStyle.font = new BitmapFont();
             buttonStyle.fontColor = WHITE;
+            buttonStyle.downFontColor = RED;
+            buttonStyle.up = skin.getDrawable("up");
+            buttonStyle.down = skin.getDrawable("down");
+
 
             //creating the textlabels & buttons incl. listener
-            gameOverLabel = new Label("GAME OVER", fontGameOver);
-            sorryLabel = new Label("You have been killed unfortunately. Do you want to: ", fontGameOver);
+            gameOverLabel = new Label("GAME OVER", font);
+            sorryLabel = new Label("Do you want to: ", font);
 
 
-            exitTB = new TextButton("# Go back to the Menu", buttonStyle);
+            exitTB = new TextButton("Go back to the Menu", buttonStyle);
             exitTB.addListener(new InputListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -78,7 +90,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
-            changeLevelTB= new TextButton("# Change the Level", buttonStyle);
+            changeLevelTB= new TextButton("Change the Level", buttonStyle);
             changeLevelTB.addListener(new InputListener(){
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -91,7 +103,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
                 }
             });
 
-            pointsLabel = new Label("You have reached " + Hud.getScore()+ " Points in this Level!", font);
+            pointsLabel = new Label("You have reached " + Hud.getScore()+ " Points but you have been killed.", font);
 
 
             //creating & filling the table
@@ -101,13 +113,13 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
             table.add(gameOverLabel).expandX();
             table.row();
-            table.add(sorryLabel).expandX().padTop(10f);
+            table.add(pointsLabel).expandX().padTop(10f);
+            table.row();
+            table.add(sorryLabel).expandX().padTop(5f);
             table.row();
             table.add(changeLevelTB).expandX().padTop(10f);
             table.row();
-            table.add(pointsLabel).expandX();
-            table.row();
-            table.add(exitTB).expandX().padTop(20f);
+            table.add(exitTB).expandX().padTop(10f);
 
             //adding table to stage
             stage.addActor(table);

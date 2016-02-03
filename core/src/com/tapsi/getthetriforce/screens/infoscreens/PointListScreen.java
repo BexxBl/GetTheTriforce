@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -31,7 +32,7 @@ public class PointListScreen implements Screen {
     private Texture texture;
     private Music music;
 
-    private Label welcomeLabel, BricksLabel, kidLabel, chickenLabel, blockLabel, lineLabel;
+    private Label bricksLabel, kidLabel, chickenLabel, blockLabel, headingLabel;
     private Table table;
 
 
@@ -46,36 +47,27 @@ public class PointListScreen implements Screen {
         stage = new Stage(viewport, game.batch);
 
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
-        Label.LabelStyle font2 = new Label.LabelStyle(new BitmapFont(),Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
-        TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = new BitmapFont();
-        buttonStyle.fontColor = WHITE;
-
-
-        welcomeLabel = new Label("List of Points you can get for: ", font);
-        BricksLabel = new Label("# Breaking Bricks - 200 Points ", font2);
-        blockLabel = new Label("# Hitting the ?- Blocks - 150 Points",font2);
-        lineLabel =new Label("---------------------",font2);
-        chickenLabel = new Label("# Killing the Chickens - 300 Points",font2);
-        kidLabel = new Label("# Killing the Horrorkids - 350 Points",font2);
+        headingLabel = new Label("Pointsystem for actions in the game", font);
+        bricksLabel = new Label("Breaking Bricks - 200 Points ", font);
+        blockLabel = new Label("Hitting the ?- Blocks - 150 Points",font);
+        chickenLabel = new Label("Killing the Chickens - 300 Points",font);
+        kidLabel = new Label("Killing the Horrorkids - 350 Points",font);
 
         table = new Table();
         table.center();
         table.setFillParent(true);
 
-        table.add(welcomeLabel).expandX();
+        table.add(headingLabel);
         table.row();
-        table.add(BricksLabel).padTop(10f);
+        table.add(bricksLabel).padTop(20f);
         table.row();
-        table.add(blockLabel).padTop(10f);
-        table.row();
-        table.add(lineLabel);
+        table.add(blockLabel).padTop(5f);
         table.row();
         table.add(chickenLabel).padTop(10f);
         table.row();
-        table.add(kidLabel).padTop(10f);
+        table.add(kidLabel).padTop(5f);
 
         stage.addActor(table);
 

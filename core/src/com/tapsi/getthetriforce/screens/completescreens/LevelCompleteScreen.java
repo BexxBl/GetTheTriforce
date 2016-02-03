@@ -9,10 +9,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -22,6 +24,8 @@ import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
+import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -34,9 +38,11 @@ public class LevelCompleteScreen implements Screen{
     private SpriteBatch sb;
     private Texture texture;
     private TextButton selectLevelTB, exitGameTB;
-    private Label completeLabel, descionLabel, pointsLabel, lineLabel;
+    private Label completeLabel, descionLabel, pointsLabel;
     private Table table;
     private Music music;
+    private Skin skin;
+    private TextureAtlas buttonatlas;
 
     public LevelCompleteScreen(final GetTheTriforce game) {
 
@@ -50,19 +56,25 @@ public class LevelCompleteScreen implements Screen{
         viewport = new FitViewport(GetTheTriforce.V_WIDTH, GetTheTriforce.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.RED);
-        Label.LabelStyle font1 = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+
+        skin = new Skin();
+        buttonatlas = new TextureAtlas(Gdx.files.internal("buttons/buttons.txt"));
+        skin.addRegions(buttonatlas);
 
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = RED;
+        buttonStyle.up = skin.getDrawable("up");
+        buttonStyle.down = skin.getDrawable("down");
 
-        completeLabel = new Label("You completed the Level", font);
-        pointsLabel = new Label("You have reached " + Hud.getScore()+ " Points in this Level!", font1);
-        lineLabel = new Label("------------", font1);
-        descionLabel = new Label("Do you want to", font);
-        selectLevelTB = new TextButton("# Select a new Level", buttonStyle);
-        exitGameTB = new TextButton("# Go back to the Menu", buttonStyle);
+
+        completeLabel = new Label("You completed the Level! Yeahr!", font);
+        pointsLabel = new Label("You have reached " + Hud.getScore()+ " Points.", font);
+        descionLabel = new Label("Do you want to: ", font);
+        selectLevelTB = new TextButton("Select a new Level", buttonStyle);
+        exitGameTB = new TextButton("Go back to the Menu", buttonStyle);
 
 
 
@@ -99,15 +111,13 @@ public class LevelCompleteScreen implements Screen{
 
         table.add(completeLabel).expandX();
         table.row();
-        table.add(pointsLabel).expandX();
+        table.add(pointsLabel).expandX().padTop(10f);
         table.row();
-        table.add(lineLabel);
+        table.add(descionLabel).padTop(5f);
         table.row();
-        table.add(descionLabel);
+        table.add(selectLevelTB).expandX().padTop(5f);
         table.row();
-        table.add(selectLevelTB).expandX().padTop(10f);
-        table.row();
-        table.add(exitGameTB).expandX().padTop(10f);
+        table.add(exitGameTB).expandX().padTop(5f);
 
         stage.addActor(table);
 
