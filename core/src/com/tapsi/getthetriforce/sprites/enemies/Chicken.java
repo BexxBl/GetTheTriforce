@@ -35,7 +35,7 @@ public class Chicken extends Enemy{
     public Chicken (PlayScreen screen, float x, float y) {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
-        for(int i = 3; i < 5; i++)
+        for(int i = 0; i < 2; i++)
             frames.add(new TextureRegion(screen.getAtlas().findRegion("chicken"), i * 16, 0, 16, 16));
         walkAnimation = new Animation(0.4f, frames);
         stateTime = 0;

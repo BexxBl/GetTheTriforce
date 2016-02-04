@@ -104,7 +104,7 @@ public class HelpControlScreen implements Screen {
     public void render(float delta) {
 
         if(Gdx.input.justTouched()) {
-            game.setScreen(new StartNavigationScreen(game));
+            game.setScreen(new com.tapsi.getthetriforce.screens.others.StartNavigationScreen(game));
             dispose();
         }
 

@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 
 
-import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -64,6 +64,7 @@ public class LevelSelectionScreen implements Screen {
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = GOLDENROD;
         buttonStyle.up = skin.getDrawable("up");
         buttonStyle.down = skin.getDrawable("down");
 
@@ -125,7 +126,7 @@ public class LevelSelectionScreen implements Screen {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 //go back to the StartNavigationScreen
-                game.setScreen(new com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen(game));
+                game.setScreen(new StartNavigationScreen(game));
                 dispose();
             }
         });

@@ -20,11 +20,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Hud;
-import com.tapsi.getthetriforce.screens.infoscreens.StartNavigationScreen;
+import com.tapsi.getthetriforce.screens.others.StartNavigationScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 
 import static com.badlogic.gdx.graphics.Color.GOLDENROD;
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -66,6 +65,7 @@ public class TimeUpScreen implements Screen {
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
+        buttonStyle.downFontColor = GOLDENROD;
         buttonStyle.up = skin.getDrawable("up");
         buttonStyle.down = skin.getDrawable("down");
 

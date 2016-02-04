@@ -12,13 +12,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
-
-import static com.badlogic.gdx.graphics.Color.GOLDENROD;
-import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
  * What Points do i get when breaking bricks, jumping at enemies or jumping at ?-blocks
@@ -86,7 +82,7 @@ public class PointListScreen implements Screen {
     public void render(float delta) {
 
         if(Gdx.input.justTouched()) {
-            game.setScreen(new StartNavigationScreen(game));
+            game.setScreen(new com.tapsi.getthetriforce.screens.others.StartNavigationScreen(game));
             dispose();
         }
 

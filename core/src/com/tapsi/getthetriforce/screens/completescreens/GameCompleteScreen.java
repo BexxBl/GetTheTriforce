@@ -74,9 +74,8 @@ public class GameCompleteScreen implements Screen{
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
-        buttonStyle.downFontColor = RED;
+        buttonStyle.downFontColor = GOLDENROD;
         buttonStyle.up = skin.getDrawable("up");
-        buttonStyle.down = skin.getDrawable("down");
         buttonStyle.down = skin.getDrawable("down");
 
         //creating the textlabels & buttons incl. listener

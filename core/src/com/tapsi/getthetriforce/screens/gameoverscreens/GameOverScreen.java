@@ -22,6 +22,7 @@ import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
+import com.tapsi.getthetriforce.screens.others.StartNavigationScreen;
 
 import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.RED;
@@ -66,6 +67,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
             buttonStyle.font = new BitmapFont();
             buttonStyle.fontColor = WHITE;
+            buttonStyle.downFontColor = GOLDENROD;
             buttonStyle.up = skin.getDrawable("up");
             buttonStyle.down = skin.getDrawable("down");
 
@@ -84,7 +86,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 
                 @Override
                 public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    game.setScreen(new ReallyWantToLeaveScreen(game));
+                    game.setScreen(new StartNavigationScreen(game));
                     dispose();
                 }
             });
