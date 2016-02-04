@@ -23,9 +23,7 @@ import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
-import static com.badlogic.gdx.graphics.Color.BROWN;
 import static com.badlogic.gdx.graphics.Color.RED;
-import static com.badlogic.gdx.graphics.Color.ROYAL;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -48,7 +46,7 @@ public class StartNavigationScreen implements Screen {
 
     private Music music;
 
-    public StartNavigationScreen(final GetTheTriforce game){
+    public StartNavigationScreen(final GetTheTriforce game) {
         this.game = game;
         sb = game.batch;
 
@@ -69,18 +67,18 @@ public class StartNavigationScreen implements Screen {
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
         buttonStyle.downFontColor = RED;
-        buttonStyle.up = skin.getDrawable("up");
-        buttonStyle.down = skin.getDrawable("down");
+        buttonStyle.up = skin.getDrawable("up1");
+        buttonStyle.down = skin.getDrawable("butoom2");
 
         //creating the Labels & Buttons
-        selectionLabel = new Label("WELCOME TO GET THE TRIFORCE",fontHeading);
+        selectionLabel = new Label("WELCOME TO GET THE TRIFORCE", fontHeading);
 
-        startTB = new TextButton("Start a new Game",buttonStyle);
-        levelSelectTB = new TextButton("Select a Level to play",buttonStyle);
-        scoreTB =new TextButton("See the Pointsystem", buttonStyle);
-        controlTB =new TextButton("How to play the Game", buttonStyle);
+        startTB = new TextButton("Start a new Game", buttonStyle);
+        levelSelectTB = new TextButton("Select a Level to play", buttonStyle);
+        scoreTB = new TextButton("See the Pointsystem", buttonStyle);
+        controlTB = new TextButton("How to play the Game", buttonStyle);
 
-        exitTB = new TextButton("Exit the Game",buttonStyle);
+        exitTB = new TextButton("Exit the Game", buttonStyle);
 
         //creating listener for the textButtons
         startTB.addListener(new InputListener() {
