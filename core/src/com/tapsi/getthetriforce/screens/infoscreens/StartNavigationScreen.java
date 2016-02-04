@@ -23,6 +23,7 @@ import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
 import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
+import static com.badlogic.gdx.graphics.Color.BLACK;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
@@ -66,9 +67,8 @@ public class StartNavigationScreen implements Screen {
         TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = new BitmapFont();
         buttonStyle.fontColor = WHITE;
-        buttonStyle.downFontColor = RED;
-        buttonStyle.up = skin.getDrawable("up1");
-        buttonStyle.down = skin.getDrawable("butoom2");
+        buttonStyle.up = skin.getDrawable("up");
+        buttonStyle.down = skin.getDrawable("down");
 
         //creating the Labels & Buttons
         selectionLabel = new Label("WELCOME TO GET THE TRIFORCE", fontHeading);

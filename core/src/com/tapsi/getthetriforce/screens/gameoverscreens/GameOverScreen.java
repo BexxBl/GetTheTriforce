@@ -66,7 +66,6 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
             TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
             buttonStyle.font = new BitmapFont();
             buttonStyle.fontColor = WHITE;
-            buttonStyle.downFontColor = RED;
             buttonStyle.up = skin.getDrawable("up");
             buttonStyle.down = skin.getDrawable("down");
 
