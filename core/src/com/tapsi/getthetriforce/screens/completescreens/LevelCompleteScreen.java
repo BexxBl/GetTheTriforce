@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.scenes.Hud;
 import com.tapsi.getthetriforce.screens.others.StartNavigationScreen;
-import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
+import com.tapsi.getthetriforce.screens.others.LevelSelectionMenu;
 
 import static com.badlogic.gdx.graphics.Color.GOLDENROD;
 import static com.badlogic.gdx.graphics.Color.WHITE;
@@ -85,7 +85,7 @@ public class LevelCompleteScreen implements Screen{
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                game.setScreen(new LevelSelectionMenu(game));
                 dispose();
             }
         });

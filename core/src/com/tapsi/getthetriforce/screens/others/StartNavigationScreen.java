@@ -21,12 +21,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.tapsi.getthetriforce.mainGameClass.GetTheTriforce;
 import com.tapsi.getthetriforce.screens.exitscreens.ReallyWantToLeaveScreen;
 import com.tapsi.getthetriforce.screens.infoscreens.PointListScreen;
-import com.tapsi.getthetriforce.screens.others.LevelSelectionScreen;
-import com.tapsi.getthetriforce.screens.others.PlayScreen;
 
-import static com.badlogic.gdx.graphics.Color.BLACK;
 import static com.badlogic.gdx.graphics.Color.GOLDENROD;
-import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
 /**
@@ -104,7 +100,7 @@ public class StartNavigationScreen implements Screen {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new LevelSelectionScreen(game));
+                game.setScreen(new LevelSelectionMenu(game));
                 dispose();
 
             }

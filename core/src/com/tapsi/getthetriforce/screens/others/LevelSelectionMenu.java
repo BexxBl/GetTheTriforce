@@ -27,7 +27,7 @@ import static com.badlogic.gdx.graphics.Color.WHITE;
 /**
  * Creates a screen to select a level
  */
-public class LevelSelectionScreen implements Screen {
+public class LevelSelectionMenu implements Screen {
     private Viewport viewport;
     private Stage stage;
 
@@ -44,7 +44,7 @@ public class LevelSelectionScreen implements Screen {
 
     private Music music;
 
-    public LevelSelectionScreen(final GetTheTriforce game){
+    public LevelSelectionMenu(final GetTheTriforce game){
         this.game = game;
         sb = game.batch;
 
